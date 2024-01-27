@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "727572789839",
+    "project_id": "flutter-sns-fire",
+    "storage_bucket": "flutter-sns-fire.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727572789839:android:13a26c02a409ce5771883a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOOzK96HOjjqX-XmTEuwUu4pAp0gh5bPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

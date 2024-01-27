@@ -1,0 +1,11 @@
+//flutter
+import 'package:flutter/material.dart';
+
+class ProfielScreen extends StatelessWidget {
+  ProfielScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}

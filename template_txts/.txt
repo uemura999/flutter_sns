@@ -1,0 +1,21 @@
+
+        let replyCount = 0;
+        let replyBatch = fireStore.batch();
+        for (const reply of replyQshot.docs) {
+            replyBatch.update(reply.ref, {
+                'userName': userName,
+                'userImageURL': userImageURL,
+                'updatedAt': now,
+            });
+            replyCount++;
+            if(replyCount == batchLimit) {
+                //500件ごとにcommitする
+                await replyBatch.commit();
+                //batchを初期化
+                replyBatch = fireStore.batch();
+                replyCount = 0;
+            }        
+        }
+        if(replyCount > 0) {
+            await replyBatch.commit();
+        }
