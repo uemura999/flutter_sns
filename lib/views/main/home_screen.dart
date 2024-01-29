@@ -1,7 +1,6 @@
 //flutter
 import 'package:flutter/material.dart';
 //packages
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //components
 import 'package:udemy_flutter_sns/details/post_card.dart';
@@ -36,7 +35,7 @@ class HomeScreen extends ConsumerWidget {
                     child: ReloadScreen(
                         onReload: () async => await homeModel.onReload()))
                 : SizedBox(
-                    height: MediaQuery.of(context).size.height,
+                    height: MediaQuery.of(context).size.height * 0.8,
                     child: RefreshScreen(
                         onRefresh: () async => await homeModel.onRefresh(),
                         onLoading: () async => await homeModel.onLoading(),
@@ -49,8 +48,8 @@ class HomeScreen extends ConsumerWidget {
                               return PostCard(
                                   post: post,
                                   postDocs: postDocs,
-                                  index: index,
-                                  mainModel: mainModel);
+                                  mainModel: mainModel,
+                                  postDoc: postDoc);
                             })),
                   ),
           ]),

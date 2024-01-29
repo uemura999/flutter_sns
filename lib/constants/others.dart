@@ -45,7 +45,7 @@ Query<Map<String, dynamic>> returnSearchQuery(
   Query<Map<String, dynamic>> query =
       FirebaseFirestore.instance.collection('users').limit(30);
   for (final searchWord in searchWords) {
-    query = query.where('searchToken$searchWord', isEqualTo: true);
+    query = query.where('searchToken.$searchWord', isEqualTo: true);
   }
   return query;
 }

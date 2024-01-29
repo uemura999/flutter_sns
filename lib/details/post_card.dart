@@ -27,13 +27,13 @@ class PostCard extends ConsumerWidget {
     Key? key,
     required this.post,
     required this.postDocs,
-    required this.index,
     required this.mainModel,
+    required this.postDoc,
   }) : super(key: key);
   final Post post;
   final List<DocumentSnapshot<Map<String, dynamic>>> postDocs;
-  final int index;
   final MainModel mainModel;
+  final DocumentSnapshot<Map<String, dynamic>> postDoc;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final PostsModel postsModel = ref.watch(postsProvider);
@@ -42,7 +42,7 @@ class PostCard extends ConsumerWidget {
     final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
     final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final bool isMyPost = post.uid == firestoreUser.uid;
-    final postDoc = postDocs[index];
+
     return isValidUser(muteUids: mainModel.muteUids, doc: postDoc) &&
             isValidPost(mutePostIds: mainModel.mutePostIds, post: post)
         ? CardContainer(

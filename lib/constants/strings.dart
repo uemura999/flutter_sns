@@ -94,6 +94,8 @@ const String missingAndroidPkgNameMsg = "Androidパッケージ名が見つか�
 const String missingIosBundleIdMsg = "iOSバンドルIDが見つかりません";
 const String sendEmailVerificationMsg = "メールアドレスの確認用のメールを送信しました";
 const String createdPostMsg = "投稿が作成されました(表示するには時間がかかります。)";
+const String maxSeardhLengthMsg = '検索ワードは100 文字以内で入力してください';
+
 // prefs key
 const String isDarkThemePrefsKey = "isDarkTheme";
 // bottom navigation bar

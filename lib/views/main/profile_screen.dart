@@ -51,8 +51,8 @@ class ProfileScreen extends ConsumerWidget {
                           return PostCard(
                               post: post,
                               postDocs: postDocs,
-                              index: index,
-                              mainModel: mainModel);
+                              mainModel: mainModel,
+                              postDoc: postDoc);
                         })),
               ),
       ]),
