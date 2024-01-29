@@ -21,6 +21,7 @@ final passiveUserProfileProvider =
 class PassiveUserProfileModel extends ChangeNotifier {
   //ユーザーの投稿を取得する
   List<DocumentSnapshot<Map<String, dynamic>>> postDocs = [];
+
   RefreshController refreshController = RefreshController();
   String indexUid = '';
   Query<Map<String, dynamic>> returnQuery(
@@ -37,14 +38,16 @@ class PassiveUserProfileModel extends ChangeNotifier {
     required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc,
   }) async {
     refreshController = RefreshController();
-    routes.toPassiveUserProfilePage(
-        context: context, mainModel: mainModel, passiveUserDoc: passiveUserDoc);
     final String passiveUid = passiveUserDoc.id;
     if (indexUid != passiveUid) {
+      postDocs = [];
       await onReload(
           muteUids: mainModel.muteUids, passiveUserDoc: passiveUserDoc);
     }
     indexUid = passiveUid;
+    routes.toPassiveUserProfilePage(
+        context: context, mainModel: mainModel, passiveUserDoc: passiveUserDoc);
+    notifyListeners();
   }
 
   Future<void> onRefresh(

@@ -26,7 +26,8 @@ class UserButton extends ConsumerWidget {
     return //自分かどうか、自分なら編集ボタンをリターン違うならフォロー、アンフォローボタン
         mainModel.currentUserDoc.id == firestoreUid
             ? RoundedButton(
-                onPressed: () => routes.toEditProfilePage,
+                onPressed: () => routes.toEditProfilePage(
+                    context: context, mainModel: mainModel),
                 widthRate: 0.85,
                 color: Colors.purple,
                 text: editProfileText)
