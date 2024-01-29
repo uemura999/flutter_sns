@@ -67,5 +67,7 @@ class CreatePostModel extends ChangeNotifier {
         .collection("posts")
         .doc(postId)
         .set(post.toJson());
+
+    await voids.showFluttertoast(msg: createdPostMsg);
   }
 }

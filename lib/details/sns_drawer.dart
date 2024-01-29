@@ -39,12 +39,12 @@ class SNSDrawer extends StatelessWidget {
             routes.toMutePostsPage(context: context, mainModel: mainModel),
       ),
       ListTile(
-        title: const Text(muteCommentPageTitle),
+        title: const Text(muteCommentsPageTitle),
         onTap: () =>
             routes.toMuteCommentsPage(context: context, mainModel: mainModel),
       ),
       ListTile(
-        title: const Text(muteReplyPageTitle),
+        title: const Text(muteRepliesPageTitle),
         onTap: () =>
             routes.toMuteRepliesPage(context: context, mainModel: mainModel),
       ),

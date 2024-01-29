@@ -1,3 +1,5 @@
+enum ReauthenticationState { initialValue, updatePassword, updateEmail }
+
 //toString
 enum TokenType {
   following,

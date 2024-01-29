@@ -1,46 +1,94 @@
 //flutter
 import 'package:flutter/material.dart';
 //packages
+import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 //constants
 import 'package:udemy_flutter_sns/constants/bools.dart';
+import 'package:udemy_flutter_sns/constants/voids.dart' as voids;
+import 'package:udemy_flutter_sns/constants/strings.dart';
 //components
 import 'package:udemy_flutter_sns/details/card_container.dart';
 import 'package:udemy_flutter_sns/details/post_like_button.dart';
 import 'package:udemy_flutter_sns/details/user_image.dart';
-import 'package:udemy_flutter_sns/domain/firestore_user/firestore_user.dart';
 //domain
+import 'package:udemy_flutter_sns/domain/firestore_user/firestore_user.dart';
 import 'package:udemy_flutter_sns/domain/post/post.dart';
 //models
 import 'package:udemy_flutter_sns/models/comments_model.dart';
 import 'package:udemy_flutter_sns/models/main_model.dart';
+import 'package:udemy_flutter_sns/models/mute_posts_model.dart';
+import 'package:udemy_flutter_sns/models/mute_users_model.dart';
 import 'package:udemy_flutter_sns/models/posts_model.dart';
 
-class PostCard extends StatelessWidget {
-  PostCard({
+class PostCard extends ConsumerWidget {
+  const PostCard({
     Key? key,
-    required this.onTap,
     required this.post,
-    required this.postDoc,
+    required this.postDocs,
+    required this.index,
     required this.mainModel,
-    required this.postsModel,
-    required this.commentsModel,
   }) : super(key: key);
-  final void Function() onTap;
   final Post post;
-  final DocumentSnapshot<Map<String, dynamic>> postDoc;
+  final List<DocumentSnapshot<Map<String, dynamic>>> postDocs;
+  final int index;
   final MainModel mainModel;
-  final PostsModel postsModel;
-  final CommentsModel commentsModel;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final PostsModel postsModel = ref.watch(postsProvider);
+    final CommentsModel commentsModel = ref.watch(commentsProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
+    final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
+    final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final bool isMyPost = post.uid == firestoreUser.uid;
+    final postDoc = postDocs[index];
     return isValidUser(muteUids: mainModel.muteUids, doc: postDoc) &&
             isValidPost(mutePostIds: mainModel.mutePostIds, post: post)
         ? CardContainer(
             borderColor: Colors.green,
-            onTap: onTap,
+            onTap: () => voids.showPopUp(
+              context: context,
+              builder: (BuildContext innerContext) => CupertinoActionSheet(
+                title: const Text(selectTitle),
+                actions: [
+                  CupertinoActionSheetAction(
+                    // This parameter indicates the action would perform
+                    // a destructive action such as delete or exit and turns
+                    // the action's text color to red.
+                    isDestructiveAction: true,
+                    onPressed: () {
+                      Navigator.pop(innerContext);
+                      muteUsersModel.showMuteUserDialog(
+                          context: context,
+                          passiveUid: post.uid,
+                          mainModel: mainModel,
+                          docs: postDocs);
+                    },
+                    child: const Text(muteUserText),
+                  ),
+                  CupertinoActionSheetAction(
+                    // This parameter indicates the action would perform
+                    // a destructive action such as delete or exit and turns
+                    // the action's text color to red.
+                    isDestructiveAction: true,
+                    onPressed: () {
+                      Navigator.pop(innerContext);
+                      mutePostsModel.showMutePostDialog(
+                          context: context,
+                          mainModel: mainModel,
+                          postDoc: postDoc,
+                          postDocs: postDocs);
+                    },
+                    child: const Text(mutePostText),
+                  ),
+                  CupertinoActionSheetAction(
+                    onPressed: () => Navigator.pop(innerContext),
+                    child: const Text(backText),
+                  ),
+                ],
+              ),
+            ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Row(

@@ -1,21 +1,24 @@
-//flutter
+// flutter
 import 'package:flutter/material.dart';
-//package
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// package
 import 'package:firebase_auth/firebase_auth.dart';
-//constants
-import 'package:udemy_flutter_sns/constants/others.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:udemy_flutter_sns/constants/lists.dart';
+import 'package:udemy_flutter_sns/constants/maps.dart';
 import 'package:udemy_flutter_sns/constants/strings.dart';
-import 'package:udemy_flutter_sns/constants/voids.dart' as voids;
-import 'package:udemy_flutter_sns/constants/routes.dart' as routes;
-//domain
+// domain
 import 'package:udemy_flutter_sns/domain/firestore_user/firestore_user.dart';
+// constants
+import 'package:udemy_flutter_sns/constants/routes.dart' as routes;
+import 'package:udemy_flutter_sns/constants/voids.dart' as voids;
 
 final signupProvider = ChangeNotifierProvider((ref) => SignupModel());
 
 class SignupModel extends ChangeNotifier {
-  final User? currentUser = returnAuthUser();
+  int counter = 0;
+  User? currentUser;
+  // auth
   String email = "";
   String password = "";
   bool isObscure = true;
@@ -29,49 +32,52 @@ class SignupModel extends ChangeNotifier {
       followingCount: 0,
       isAdmin: false,
       muteCount: 0,
-      updatedAt: now,
+      searchToken: returnSearchToken(
+          searchWords: returnSearchWords(searchTerm: "Alice")),
+      postCount: 0,
       uid: uid,
-      userName: aliceName,
-      userImageURL: '',
+      updatedAt: now,
+      userName: "Alice",
+      userImageURL: "",
+      userNameLanguageCode: "",
+      userNameNegativeScore: 0.0,
+      userNamePositiveScore: 0.0,
+      userNameSentiment: "",
     );
     final Map<String, dynamic> userData = firestoreUser.toJson();
-
-    await FirebaseFirestore.instance
-        .collection(usersFieldKey)
-        .doc(uid)
-        .set(userData);
-    await voids.showFluttertoast(msg: 'ユーザー登録が完了しました');
+    await FirebaseFirestore.instance.collection("users").doc(uid).set(userData);
+    await voids.showFluttertoast(msg: userCreatedMsg);
     notifyListeners();
   }
 
   Future<void> createUser({required BuildContext context}) async {
     try {
-      UserCredential result = await FirebaseAuth.instance
+      final result = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-
       final User? user = result.user;
       final String uid = user!.uid;
-
       await createFirestoreUser(context: context, uid: uid);
-      routes.toMyApp(context: context);
+      routes.toVerifyEmailPage(context: context);
     } on FirebaseAuthException catch (e) {
       final String errorCode = e.code;
+      String msg = "";
       switch (errorCode) {
-        case 'email-already-in-use':
-          await voids.showFluttertoast(msg: emailAlredyInUseMsg);
+        case "email-already-in-use":
+          msg = emailAlreadyInUseMsg;
           break;
-        case 'operation-not-allowed':
-          //Firebaseでemail/passwordが許可されていない
-          //開発側の過失
-          debugPrint(firebaseAuthEmailOperationNotAllowedMsg);
+        case "operation-not-allowed":
+          // Firebaseでemail/passwordが許可されていない
+          // 開発側の過失
+          msg = firebaseAuthEmailOperationNotAllowed;
           break;
-        case 'weak-password':
-          await voids.showFluttertoast(msg: weakPasswordMsg);
+        case "weak-password":
+          msg = weakPasswordMsg;
           break;
-        case 'invalid-email':
-          await voids.showFluttertoast(msg: invalidEmailMsg);
+        case "invalid-email":
+          msg = invalidEmailMsg;
           break;
       }
+      await voids.showFluttertoast(msg: msg);
     }
   }
 

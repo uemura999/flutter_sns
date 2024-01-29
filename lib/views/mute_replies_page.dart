@@ -25,7 +25,7 @@ class MuteRepliesPage extends ConsumerWidget {
     final muteReplyDocs = muteRepliesModel.muteReplyDocs;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(muteReplyPageTitle),
+        title: const Text(muteRepliesPageTitle),
       ),
       body: muteRepliesModel.showMuteReplies
           ? RefreshScreen(

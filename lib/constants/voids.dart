@@ -53,12 +53,10 @@ Future<void> processNewDocs(
     required List<DocumentSnapshot<Map<String, dynamic>>> docs,
     required Query<Map<String, dynamic>> query}) async {
   if (docs.isNotEmpty) {
-    if (docs.isNotEmpty) {
-      final qshot = await query.limit(30).endBeforeDocument(docs.first).get();
-      final reversed = qshot.docs.reversed.toList();
-      for (final doc in reversed) {
-        if (isValidUser(muteUids: muteUids, doc: doc)) docs.insert(0, doc);
-      }
+    final qshot = await query.limit(30).endBeforeDocument(docs.first).get();
+    final reversed = qshot.docs.reversed.toList();
+    for (final doc in reversed) {
+      if (isValidUser(muteUids: muteUids, doc: doc)) docs.insert(0, doc);
     }
   }
 }

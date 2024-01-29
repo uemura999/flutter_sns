@@ -25,7 +25,7 @@ class MuteCommentsPage extends ConsumerWidget {
     final muteCommentDocs = muteCommentsModel.muteCommentDocs;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(muteCommentPageTitle),
+        title: const Text(muteCommentsPageTitle),
       ),
       body: muteCommentsModel.showMuteComments
           ? RefreshScreen(

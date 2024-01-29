@@ -2,17 +2,21 @@
 import 'package:flutter/material.dart';
 // packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:udemy_flutter_sns/details/rounded_button.dart';
 // components
-import 'package:udemy_flutter_sns/details/user_image.dart';
+import 'package:udemy_flutter_sns/details/post_card.dart';
+import 'package:udemy_flutter_sns/details/reload_screen.dart';
+import 'package:udemy_flutter_sns/details/user_header.dart';
+import 'package:udemy_flutter_sns/views/refresh_screen.dart';
 // domain
+import 'package:udemy_flutter_sns/domain/post/post.dart';
 import 'package:udemy_flutter_sns/domain/firestore_user/firestore_user.dart';
 // models
+import 'package:udemy_flutter_sns/models/comments_model.dart';
 import 'package:udemy_flutter_sns/models/main_model.dart';
 import 'package:udemy_flutter_sns/models/main/profile_model.dart';
-//constants
-import 'package:udemy_flutter_sns/constants/strings.dart';
-import 'package:udemy_flutter_sns/constants/routes.dart' as routes;
+import 'package:udemy_flutter_sns/models/mute_posts_model.dart';
+import 'package:udemy_flutter_sns/models/mute_users_model.dart';
+import 'package:udemy_flutter_sns/models/posts_model.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key, required this.mainModel}) : super(key: key);
@@ -20,32 +24,38 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ProfileModel profileModel = ref.watch(profileProvider);
+    final PostsModel postsModel = ref.watch(postsProvider);
+    final CommentsModel commentsModel = ref.watch(commentsProvider);
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
+    final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
+    final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
+    final postDocs = profileModel.postDocs;
 
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          UserImage(
-            length: 100.0,
-            userImageURL: firestoreUser.userImageURL,
-          ),
-          Text(
-            firestoreUser.userName,
-            style: const TextStyle(fontSize: 32.0),
-          ),
-          Text('Following:${firestoreUser.followingCount.toString()}',
-              style: const TextStyle(fontSize: 32.0)),
-          Text(
-            'Follower:${firestoreUser.followerCount.toString()}',
-            style: const TextStyle(fontSize: 32.0),
-          ),
-          RoundedButton(
-              onPressed: () => routes.toEditProfilePage(
-                  context: context, mainModel: mainModel),
-              widthRate: 0.85,
-              color: Colors.purple,
-              text: editProfileText)
-        ]);
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+        UserHeader(firestoreUser: firestoreUser, mainModel: mainModel),
+        postDocs.isEmpty
+            ? ReloadScreen(onReload: () async => await profileModel.onReload())
+            : SizedBox(
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: RefreshScreen(
+                    onRefresh: () async => await profileModel.onRefresh(),
+                    onLoading: () async => await profileModel.onLoading(),
+                    refreshController: profileModel.refreshController,
+                    child: ListView.builder(
+                        itemCount: postDocs.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final postDoc = postDocs[index];
+                          final Post post = Post.fromJson(postDoc.data()!);
+                          return PostCard(
+                              post: post,
+                              postDocs: postDocs,
+                              index: index,
+                              mainModel: mainModel);
+                        })),
+              ),
+      ]),
+    );
   }
 }

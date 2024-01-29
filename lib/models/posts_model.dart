@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:udemy_flutter_sns/constants/enum.dart';
+import 'package:udemy_flutter_sns/constants/enums.dart';
 //constants
 import 'package:udemy_flutter_sns/constants/strings.dart';
 //domain

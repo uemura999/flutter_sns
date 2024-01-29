@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 //constants
 import 'package:udemy_flutter_sns/constants/themes.dart';
 import 'package:udemy_flutter_sns/constants/strings.dart';
+import 'package:udemy_flutter_sns/views/auth/verify_email_page.dart';
 //options
 import 'firebase_options.dart';
 //constants
@@ -45,12 +46,14 @@ class MyApp extends ConsumerWidget {
       theme: themeModel.isDarkTheme
           ? darkThemeData(context: context)
           : lightThemeData(context: context),
-      home: onceUser == null
-          ? const LoginPage()
-          : MyHomePage(
-              title: appTitle,
-              themeModel: themeModel,
-            ),
+      home: onceUser == null //ユーザーが存在していないなら
+          ? const LoginPage() //ログインページへ
+          : onceUser.emailVerified //ユーザーが存在していて、かつメールアドレスが確認済みなら
+              ? MyHomePage(
+                  title: appTitle,
+                  themeModel: themeModel,
+                )
+              : const VerifyEmailPage(),
     );
   }
 }

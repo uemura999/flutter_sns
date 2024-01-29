@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 //constants
-import 'package:udemy_flutter_sns/constants/enum.dart';
+import 'package:udemy_flutter_sns/constants/enums.dart';
 import 'package:udemy_flutter_sns/constants/lists.dart';
 import 'package:udemy_flutter_sns/constants/others.dart';
 import 'package:udemy_flutter_sns/constants/strings.dart';
@@ -203,9 +203,8 @@ class CommentsModel extends ChangeNotifier {
     mainModel.likeCommentTokens.remove(deleteLikeCommentToken);
     notifyListeners();
     //自分がコメントにいいねした印を削除
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc,
-            tokenId: deleteLikeCommentToken.tokenId)
+    await userDocToTokenDocRef(
+            userDoc: currentUserDoc, tokenId: deleteLikeCommentToken.tokenId)
         .delete();
     //コメントがいいねされた印を削除
     final DocumentReference<Map<String, dynamic>> postCommentRef =

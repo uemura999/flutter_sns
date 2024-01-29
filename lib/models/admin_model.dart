@@ -4,16 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:udemy_flutter_sns/constants/enum.dart';
 //constants
+import 'package:udemy_flutter_sns/constants/enums.dart';
+import 'package:udemy_flutter_sns/constants/lists.dart';
+import 'package:udemy_flutter_sns/constants/maps.dart';
 import 'package:udemy_flutter_sns/constants/others.dart';
 import 'package:udemy_flutter_sns/constants/voids.dart' as voids;
 import 'package:udemy_flutter_sns/constants/strings.dart';
 //domain
 import 'package:udemy_flutter_sns/domain/firestore_user/firestore_user.dart';
+import 'package:udemy_flutter_sns/domain/follower/follower.dart';
+import 'package:udemy_flutter_sns/domain/following_token/following_token.dart';
 import 'package:udemy_flutter_sns/domain/mute_user_token/mute_user_token.dart';
 import 'package:udemy_flutter_sns/domain/post/post.dart';
 import 'package:udemy_flutter_sns/domain/user_mute/user_mute.dart';
+//models
 import 'package:udemy_flutter_sns/models/mute_users_model.dart';
 
 final adminProvider = ChangeNotifierProvider((ref) => AdminModel());
@@ -23,6 +28,7 @@ class AdminModel extends ChangeNotifier {
       {required DocumentSnapshot<Map<String, dynamic>> currentUserDoc,
       required FirestoreUser firestoreUser,
       required MuteUsersModel muteUsersModel}) async {
+    final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
     // //管理者にだけ出来る処理
     // //ユーザーのemailの削除
     // WriteBatch batch = FirebaseFirestore.instance.batch();
@@ -81,7 +87,6 @@ class AdminModel extends ChangeNotifier {
     // }
     // await writeBatch.commit();
 
-    final WriteBatch writeBatch = FirebaseFirestore.instance.batch();
     // for (int i = 0; i < 35; i++) {
     //   final String passiveUid = 'newMuteUser${i.toString()}';
     //   final Timestamp now = Timestamp.now();
@@ -135,6 +140,52 @@ class AdminModel extends ChangeNotifier {
     //     .get();
     // for (final replyDoc in repliesQshot.docs) {
     //   writeBatch.update(replyDoc.reference, {'muteCount': 0});
+    // }
+
+    //followerの作成
+    //adminで作成する70人のユーザーを取得する
+    // final userQshot =
+    //     await FirebaseFirestore.instance.collection('users').limit(70).get();
+    // final User currentUser = returnAuthUser()!;
+    // for (final userDoc in userQshot.docs) {
+    //   final Timestamp now = Timestamp.now();
+    //   final String currentUid = currentUser.uid;
+    //   final String tokenId = returnUuidV4();
+    //   //フォローした証
+    //   final FollowingToken followingToken = FollowingToken(
+    //       createdAt: now,
+    //       passiveUid: currentUid,
+    //       tokenId: tokenId,
+    //       tokenType: followingTokenTypeString);
+    //   writeBatch.set(userDocToTokenDocRef(userDoc: userDoc, tokenId: tokenId),
+    //       followingToken.toJson());
+
+    //   //フォローされた証
+    //   final Follower follower = Follower(
+    //       createdAt: now, followedUid: currentUid, followerUid: userDoc.id);
+    //   writeBatch.set(
+    //       FirebaseFirestore.instance
+    //           .collection('users')
+    //           .doc(currentUid)
+    //           .collection('followers')
+    //           .doc(follower.followerUid),
+    //       follower.toJson());
+    //   await Future.delayed(const Duration(milliseconds: 100));
+    // }
+
+    //firestore_user.dartの更新
+    // final usersQshot =
+    //     await FirebaseFirestore.instance.collection('users').get();
+    // for (final userDoc in usersQshot.docs) {
+    //   writeBatch.update(userDoc.reference, {
+    //     'searchToken': returnSearchToken(
+    //         searchWords: returnSearchWords(searchTerm: userDoc['userName'])),
+    //     'postCount': 0,
+    //     'userNameLanguageCode': 'en',
+    //     'userNameNegativeScore': 0.0,
+    //     'userNamePositiveScore': 0.0,
+    //     'userNameSentiment': 'POSITIVE'
+    //   });
     // }
 
     await writeBatch.commit();

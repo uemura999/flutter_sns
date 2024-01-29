@@ -35,7 +35,17 @@ Future<File?> returnCroppedFile({required XFile? xFile}) async {
 
 User? returnAuthUser() => FirebaseAuth.instance.currentUser;
 
-DocumentReference<Map<String, dynamic>> currentUserDocToTokenDocRef(
-        {required DocumentSnapshot<Map<String, dynamic>> currentUserDoc,
+DocumentReference<Map<String, dynamic>> userDocToTokenDocRef(
+        {required DocumentSnapshot<Map<String, dynamic>> userDoc,
         required String tokenId}) =>
-    currentUserDoc.reference.collection('tokens').doc(tokenId);
+    userDoc.reference.collection('tokens').doc(tokenId);
+
+Query<Map<String, dynamic>> returnSearchQuery(
+    {required List<String> searchWords}) {
+  Query<Map<String, dynamic>> query =
+      FirebaseFirestore.instance.collection('users').limit(30);
+  for (final searchWord in searchWords) {
+    query = query.where('searchToken$searchWord', isEqualTo: true);
+  }
+  return query;
+}

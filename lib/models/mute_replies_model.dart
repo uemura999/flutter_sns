@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 //constants
-import 'package:udemy_flutter_sns/constants/enum.dart';
+import 'package:udemy_flutter_sns/constants/enums.dart';
 import 'package:udemy_flutter_sns/constants/ints.dart';
 import 'package:udemy_flutter_sns/constants/others.dart';
 import 'package:udemy_flutter_sns/constants/strings.dart';
@@ -137,8 +137,7 @@ class MuteRepliesModel extends ChangeNotifier {
     notifyListeners();
     //自分がミュートしたことの印
     //currentUserDoc.reference.collection('tokens').doc(tokenId)
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc, tokenId: tokenId)
+    await userDocToTokenDocRef(userDoc: currentUserDoc, tokenId: tokenId)
         .set(muteReplyToken.toJson());
 
     //リプライがミュートされたことの印
@@ -209,9 +208,8 @@ class MuteRepliesModel extends ChangeNotifier {
     notifyListeners();
 
     //自分がミュートした印を削除
-    await currentUserDocToTokenDocRef(
-            currentUserDoc: currentUserDoc,
-            tokenId: deleteMuteReplyToken.tokenId)
+    await userDocToTokenDocRef(
+            userDoc: currentUserDoc, tokenId: deleteMuteReplyToken.tokenId)
         .delete();
 
     //リプライがミュートされた印を削除
