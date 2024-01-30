@@ -24,6 +24,7 @@ const String reauthenticationPageTitle = "再認証";
 const String updatePasswordPageTitle = "新しいパスワード";
 const String updateEmailPageTitle = "新しいメールアドレス";
 const String forgetPasswordPageTitle = "パスワードを忘れた場合";
+
 // texts
 const String mailAddressText = "メールアドレス";
 const String passwordText = "パスワード";
@@ -61,6 +62,12 @@ const String sendResetEmailText = "パスワードリセット用のメールを
 const String loginMailAddressText = 'ログインするメールアドレス';
 const String followText = "フォローする";
 const String unFollowText = "フォローを解除する";
+const String sortByLikeCountText = "いいね順に並び替え";
+const String sortByNewText = "新しい順に並び替え";
+const String sortByOldText = "古い順に並び替え";
+const String usersText = "ユーザー";
+const String postsText = "投稿";
+const String searchHintText = '検索ワードを入力してください';
 
 // alert message
 const String muteUserAlertMsg = 'ユーザーをミュートしますが本当によろしいですか？';

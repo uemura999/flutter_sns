@@ -43,8 +43,9 @@ class PostCard extends ConsumerWidget {
     final MutePostsModel mutePostsModel = ref.watch(mutePostsProvider);
     final bool isMyPost = post.uid == firestoreUser.uid;
 
-    return isValidUser(muteUids: mainModel.muteUids, doc: postDoc) &&
-            isValidPost(mutePostIds: mainModel.mutePostIds, post: post)
+    return isValidUser(muteUids: mainModel.muteUids, map: postDoc.data()!) &&
+            isValidPost(
+                mutePostIds: mainModel.mutePostIds, map: postDoc.data()!)
         ? CardContainer(
             borderColor: Colors.green,
             onTap: () => voids.showPopUp(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 //packages
+import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -21,15 +22,20 @@ final passiveUserProfileProvider =
 class PassiveUserProfileModel extends ChangeNotifier {
   //ユーザーの投稿を取得する
   List<DocumentSnapshot<Map<String, dynamic>>> postDocs = [];
-
+  SortState sortState = SortState.byNewestFirst;
   RefreshController refreshController = RefreshController();
   String indexUid = '';
   Query<Map<String, dynamic>> returnQuery(
       {required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) {
-    return passiveUserDoc.reference
-        .collection('posts')
-        .orderBy('createdAt', descending: true)
-        .limit(30);
+    final query = passiveUserDoc.reference.collection('posts');
+    switch (sortState) {
+      case SortState.byLikeCount:
+        return query.orderBy('likeCount', descending: true);
+      case SortState.byNewestFirst:
+        return query.orderBy('createdAt', descending: true);
+      case SortState.byOldestFirst:
+        return query.orderBy('createdAt', descending: false);
+    }
   }
 
   Future<void> onUserIconPressed({
@@ -42,7 +48,9 @@ class PassiveUserProfileModel extends ChangeNotifier {
     if (indexUid != passiveUid) {
       postDocs = [];
       await onReload(
-          muteUids: mainModel.muteUids, passiveUserDoc: passiveUserDoc);
+          muteUids: mainModel.muteUids,
+          mutePostIds: mainModel.mutePostIds,
+          passiveUserDoc: passiveUserDoc);
     }
     indexUid = passiveUid;
     routes.toPassiveUserProfilePage(
@@ -52,10 +60,12 @@ class PassiveUserProfileModel extends ChangeNotifier {
 
   Future<void> onRefresh(
       {required List<String> muteUids,
+      required List<String> mutePostIds,
       required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
     refreshController.refreshCompleted();
     await voids.processNewDocs(
         muteUids: muteUids,
+        mutePostIds: mutePostIds,
         docs: postDocs,
         query: returnQuery(passiveUserDoc: passiveUserDoc));
     notifyListeners();
@@ -63,9 +73,11 @@ class PassiveUserProfileModel extends ChangeNotifier {
 
   Future<void> onReload(
       {required List<String> muteUids,
+      required List<String> mutePostIds,
       required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
     await voids.processBasicDocs(
         muteUids: muteUids,
+        mutePostIds: mutePostIds,
         docs: postDocs,
         query: returnQuery(passiveUserDoc: passiveUserDoc));
     notifyListeners();
@@ -73,10 +85,12 @@ class PassiveUserProfileModel extends ChangeNotifier {
 
   Future<void> onLoading(
       {required List<String> muteUids,
+      required List<String> mutePostIds,
       required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) async {
     refreshController.loadComplete();
     await voids.processOldDocs(
         muteUids: muteUids,
+        mutePostIds: mutePostIds,
         docs: postDocs,
         query: returnQuery(passiveUserDoc: passiveUserDoc));
     notifyListeners();
@@ -149,5 +163,63 @@ class PassiveUserProfileModel extends ChangeNotifier {
         .collection('followers')
         .doc(activeUser.uid)
         .delete();
+  }
+
+  void onMenuPressed(
+      {required BuildContext context,
+      required List<String> muteUids,
+      required List<String> mutePostIds,
+      required DocumentSnapshot<Map<String, dynamic>> passiveUserDoc}) {
+    voids.showPopUp(
+        context: context,
+        builder: (BuildContext innerContext) {
+          return CupertinoActionSheet(
+            message: const Text(selectTitle),
+            actions: [
+              CupertinoActionSheetAction(
+                  onPressed: () async {
+                    if (sortState != SortState.byLikeCount) {
+                      sortState = SortState.byLikeCount;
+                      await onReload(
+                          muteUids: muteUids,
+                          mutePostIds: mutePostIds,
+                          passiveUserDoc: passiveUserDoc);
+                    }
+                    Navigator.pop(innerContext);
+                  },
+                  isDestructiveAction: true,
+                  child: const Text(sortByLikeCountText)),
+              CupertinoActionSheetAction(
+                  onPressed: () async {
+                    if (sortState != SortState.byNewestFirst) {
+                      sortState = SortState.byNewestFirst;
+                      await onReload(
+                          muteUids: muteUids,
+                          mutePostIds: mutePostIds,
+                          passiveUserDoc: passiveUserDoc);
+                    }
+                    Navigator.pop(innerContext);
+                  },
+                  isDestructiveAction: true,
+                  child: const Text(sortByNewText)),
+              CupertinoActionSheetAction(
+                  onPressed: () async {
+                    if (sortState != SortState.byOldestFirst) {
+                      sortState = SortState.byOldestFirst;
+                      await onReload(
+                          muteUids: muteUids,
+                          mutePostIds: mutePostIds,
+                          passiveUserDoc: passiveUserDoc);
+                    }
+                    Navigator.pop(innerContext);
+                  },
+                  isDestructiveAction: true,
+                  child: const Text(sortByOldText)),
+              CupertinoActionSheetAction(
+                  onPressed: () => Navigator.pop(innerContext),
+                  child: const Text(backText)),
+            ],
+          );
+        });
   }
 }

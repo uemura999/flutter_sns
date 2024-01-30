@@ -38,7 +38,15 @@ class PassiveUserProfilePage extends ConsumerWidget {
           physics: const NeverScrollableScrollPhysics(),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            UserHeader(firestoreUser: passiveUser, mainModel: mainModel),
+            UserHeader(
+              firestoreUser: passiveUser,
+              mainModel: mainModel,
+              onTap: () => passiveUserProfileModel.onMenuPressed(
+                  context: context,
+                  muteUids: muteUids,
+                  mutePostIds: mainModel.mutePostIds,
+                  passiveUserDoc: passiveUserDoc),
+            ),
             postDocs.isEmpty
                 ? SizedBox(
                     height: MediaQuery.of(context).size.height * 0.3,
@@ -46,18 +54,21 @@ class PassiveUserProfilePage extends ConsumerWidget {
                         onReload: () async =>
                             await passiveUserProfileModel.onReload(
                                 muteUids: muteUids,
+                                mutePostIds: mainModel.mutePostIds,
                                 passiveUserDoc: passiveUserDoc)),
                   )
                 : SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.5,
+                    height: MediaQuery.of(context).size.height * 0.8,
                     child: RefreshScreen(
                         onRefresh: () async =>
                             await passiveUserProfileModel.onRefresh(
                                 muteUids: muteUids,
+                                mutePostIds: mainModel.mutePostIds,
                                 passiveUserDoc: passiveUserDoc),
                         onLoading: () async =>
                             await passiveUserProfileModel.onLoading(
                                 muteUids: muteUids,
+                                mutePostIds: mainModel.mutePostIds,
                                 passiveUserDoc: passiveUserDoc),
                         refreshController:
                             passiveUserProfileModel.refreshController,

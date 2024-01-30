@@ -16,8 +16,7 @@ class AccountModel extends ChangeNotifier {
   bool isObscure = true;
   User? currentUser = returnAuthUser();
   String password = "";
-  ReauthenticationState reauthenticationState =
-      ReauthenticationState.initialValue;
+  ReauthenticateState reauthenticationState = ReauthenticateState.initialValue;
 
   Future<void> reauthenticateWithCredential(
       {required BuildContext context}) async {
@@ -33,10 +32,10 @@ class AccountModel extends ChangeNotifier {
       await currentUser!.reauthenticateWithCredential(credential);
       await voids.showFluttertoast(msg: reauthenticatedMsg);
       switch (reauthenticationState) {
-        case ReauthenticationState.updatePassword:
+        case ReauthenticateState.updatePassword:
           routes.toUpdatePasswordPage(context: context);
           break;
-        case ReauthenticationState.updateEmail:
+        case ReauthenticateState.updateEmail:
           routes.toUpdateEmailPage(context: context);
           break;
         default:

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 //constants
 import 'package:udemy_flutter_sns/constants/themes.dart';
 import 'package:udemy_flutter_sns/constants/strings.dart';
@@ -17,14 +18,14 @@ import 'package:udemy_flutter_sns/models/main_model.dart';
 import 'package:udemy_flutter_sns/models/sns_bottom_navigation_bar_model.dart';
 //components
 import 'package:udemy_flutter_sns/details/sns_bottom_navigation_bar.dart';
-import 'package:udemy_flutter_sns/details/sns_drawer.dart';
 import 'package:udemy_flutter_sns/views/login_page.dart';
 import 'package:udemy_flutter_sns/views/main/home_screen.dart';
 import 'package:udemy_flutter_sns/views/main/profile_screen.dart';
-import 'package:udemy_flutter_sns/views/main/search_screen.dart';
+import 'package:udemy_flutter_sns/views/main/search_page.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -49,7 +50,6 @@ class MyApp extends ConsumerWidget {
           ? const LoginPage() //ログインページへ
           : onceUser.emailVerified //ユーザーが存在していて、かつメールアドレスが確認済みなら
               ? MyHomePage(
-                  title: appTitle,
                   themeModel: themeModel,
                 )
               : const VerifyEmailPage(),
@@ -58,8 +58,8 @@ class MyApp extends ConsumerWidget {
 }
 
 class MyHomePage extends ConsumerWidget {
-  const MyHomePage({super.key, required this.title, required this.themeModel});
-  final String title;
+  const MyHomePage({super.key, required this.themeModel});
+
   final ThemeModel themeModel;
 
   @override
@@ -71,14 +71,6 @@ class MyHomePage extends ConsumerWidget {
         ref.watch(snsBottomNavigationBarProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
-      ),
-      drawer: SNSDrawer(
-        mainModel: mainModel,
-        themeModel: themeModel,
-      ),
       body: mainModel.isLoading
           ? const Center(
               child: Text(loadingText),
@@ -91,13 +83,15 @@ class MyHomePage extends ConsumerWidget {
               children: [
                 HomeScreen(
                   mainModel: mainModel,
+                  themeModel: themeModel,
                 ),
-                SearchScreen(
+                SearchPage(
                   mainModel: mainModel,
                 ),
                 const ArticlesScreen(),
                 ProfileScreen(
                   mainModel: mainModel,
+                  themeModel: themeModel,
                 )
               ],
             ),

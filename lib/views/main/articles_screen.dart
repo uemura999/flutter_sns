@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 //packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//constants
+import 'package:udemy_flutter_sns/constants/strings.dart';
 //components
 import 'package:udemy_flutter_sns/details/article_user_image.dart';
 //domain
@@ -16,6 +18,9 @@ class ArticlesScreen extends ConsumerWidget {
     final ArticlesModel articlesModel = ref.watch(articlesProvider);
     final articles = articlesModel.articles;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(articleText),
+      ),
       body: articlesModel.isLoading
           ? const Center(child: CircularProgressIndicator())
           : Container(

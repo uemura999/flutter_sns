@@ -1,16 +1,15 @@
-//flutter
-import 'package:cloud_firestore/cloud_firestore.dart';
 //domain
 import 'package:udemy_flutter_sns/domain/comment/comment.dart';
-import 'package:udemy_flutter_sns/domain/post/post.dart';
 import 'package:udemy_flutter_sns/domain/reply/reply.dart';
 
 bool isValidUser(
-        {required List<String> muteUids, required DocumentSnapshot doc}) =>
-    !muteUids.contains(doc['uid']);
+        {required List<String> muteUids, required Map<String, dynamic> map}) =>
+    !muteUids.contains(map['uid']);
 
-bool isValidPost({required List<String> mutePostIds, required Post post}) =>
-    !mutePostIds.contains(post.postId);
+bool isValidPost(
+        {required List<String> mutePostIds,
+        required Map<String, dynamic> map}) =>
+    !mutePostIds.contains(map['postId']);
 
 bool isValidComment(
         {required List<String> muteCommentIds, required Comment comment}) =>

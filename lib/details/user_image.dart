@@ -18,7 +18,7 @@ class UserImage extends StatelessWidget {
                 border: Border.all(color: Colors.green)),
             child: Icon(
               Icons.person,
-              size: length,
+              size: length - 8,
             ),
           )
         : CircleImage(length: length, image: NetworkImage(userImageURL));
