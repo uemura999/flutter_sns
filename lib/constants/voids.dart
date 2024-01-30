@@ -50,6 +50,7 @@ void showFlashBar({
 //onRefreshの内部
 Future<void> processNewDocs(
     {required List<String> muteUids,
+    required List<String> mutePostIds,
     required List<DocumentSnapshot<Map<String, dynamic>>> docs,
     required Query<Map<String, dynamic>> query}) async {
   if (docs.isNotEmpty) {
@@ -57,8 +58,10 @@ Future<void> processNewDocs(
     final reversed = qshot.docs.reversed.toList();
     for (final doc in reversed) {
       //正しいユーザーかどうかの処理と、重複処理を防ぐための処理
-      if (isValidUser(muteUids: muteUids, doc: doc) && !reversed.contains(doc))
-        docs.insert(0, doc);
+      final map = doc.data();
+      if (isValidUser(muteUids: muteUids, map: map) &&
+          !reversed.contains(doc) &&
+          isValidPost(mutePostIds: mutePostIds, map: map)) docs.insert(0, doc);
     }
   }
 }
@@ -66,29 +69,36 @@ Future<void> processNewDocs(
 //onReloadの内部
 Future<void> processBasicDocs(
     {required List<String> muteUids,
+    required List<String> mutePostIds,
     required List<DocumentSnapshot<Map<String, dynamic>>> docs,
     required Query<Map<String, dynamic>> query}) async {
   final qshot = await query.limit(30).get();
+  docs.removeWhere((element) => true); //中身を全て削除
   for (final doc in qshot.docs) {
     //doc['uid']は投稿主のuid
     //!は否定演算子
     //正しいユーザーかどうかの処理と、重複処理を防ぐための処理
-    if (isValidUser(muteUids: muteUids, doc: doc) && !docs.contains(doc))
-      docs.add(doc);
+    final map = doc.data();
+    if (isValidUser(muteUids: muteUids, map: map) &&
+        !docs.contains(doc) &&
+        isValidPost(mutePostIds: mutePostIds, map: map)) docs.add(doc);
   }
 }
 
 //onLoadingの内部
 Future<void> processOldDocs(
     {required List<String> muteUids,
+    required List<String> mutePostIds,
     required List<DocumentSnapshot<Map<String, dynamic>>> docs,
     required Query<Map<String, dynamic>> query}) async {
   if (docs.isNotEmpty) {
     final qshot = await query.limit(30).startAfterDocument(docs.last).get();
     for (final doc in qshot.docs) {
       //正しいユーザーかどうかの処理と、重複処理を防ぐための処理
-      if (isValidUser(muteUids: muteUids, doc: doc) && !docs.contains(doc))
-        docs.add(doc);
+      final map = doc.data();
+      if (isValidUser(muteUids: muteUids, map: map) &&
+          !docs.contains(doc) &&
+          isValidPost(mutePostIds: mutePostIds, map: map)) docs.add(doc);
     }
   }
 }

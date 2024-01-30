@@ -10,24 +10,29 @@ import 'package:udemy_flutter_sns/constants/others.dart';
 import 'package:udemy_flutter_sns/constants/strings.dart';
 import 'package:udemy_flutter_sns/constants/voids.dart' as voids;
 
-final searchProvider = ChangeNotifierProvider((ref) => SearchModel());
+final userSearchProvider = ChangeNotifierProvider((ref) => UserSearchModel());
 
-class SearchModel extends ChangeNotifier {
+class UserSearchModel extends ChangeNotifier {
   List<DocumentSnapshot<Map<String, dynamic>>> userDocs = [];
   String searchTerm = '';
 
-  Future<void> operation({required List<String> muteUids}) async {
+  Future<void> operation(
+      {required List<String> muteUids,
+      required List<String> mutePostIds}) async {
     if (searchTerm.length > maxSearchLength) {
       await voids.showFluttertoast(msg: maxSeardhLengthMsg);
     } else if (searchTerm.isNotEmpty) {
-      userDocs = [];
+      userDocs.removeWhere((element) => true); //中身を全て削除
       final List<String> searchWords =
           returnSearchWords(searchTerm: searchTerm);
       //queryは文字数-1個のwhereが必要
       final Query<Map<String, dynamic>> query =
           returnSearchQuery(searchWords: searchWords);
       await voids.processBasicDocs(
-          muteUids: muteUids, docs: userDocs, query: query);
+          muteUids: muteUids,
+          mutePostIds: mutePostIds,
+          docs: userDocs,
+          query: query);
       notifyListeners();
     }
   }

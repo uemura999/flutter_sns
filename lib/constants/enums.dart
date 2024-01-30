@@ -1,4 +1,6 @@
-enum ReauthenticationState { initialValue, updatePassword, updateEmail }
+enum ReauthenticateState { initialValue, updatePassword, updateEmail }
+
+enum SortState { byLikeCount, byNewestFirst, byOldestFirst }
 
 //toString
 enum TokenType {

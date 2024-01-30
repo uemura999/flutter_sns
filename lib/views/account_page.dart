@@ -29,7 +29,7 @@ class AccountPage extends ConsumerWidget {
               // reauthenticationするページに飛ばす
               onTap: () {
                 accountModel.reauthenticationState =
-                    ReauthenticationState.updatePassword;
+                    ReauthenticateState.updatePassword;
                 routes.toReauthenticationPage(context: context);
               }),
           ListTile(
@@ -39,7 +39,7 @@ class AccountPage extends ConsumerWidget {
               // reauthenticationするページに飛ばす
               onTap: () {
                 accountModel.reauthenticationState =
-                    ReauthenticationState.updateEmail;
+                    ReauthenticateState.updateEmail;
                 routes.toReauthenticationPage(context: context);
               }),
           ListTile(

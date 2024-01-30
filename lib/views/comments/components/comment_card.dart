@@ -18,7 +18,7 @@ import 'package:udemy_flutter_sns/models/comments_model.dart';
 import 'package:udemy_flutter_sns/models/main_model.dart';
 
 class CommentCard extends StatelessWidget {
-  CommentCard({
+  const CommentCard({
     Key? key,
     required this.onTap,
     required this.mainModel,
@@ -38,7 +38,7 @@ class CommentCard extends StatelessWidget {
     //mainModelのfirestoreUserは更新されている。updateされた瞬間
     final FirestoreUser firestoreUser = mainModel.firestoreUser;
     final bool isMyComment = comment.uid == firestoreUser.uid;
-    return isValidUser(muteUids: mainModel.muteUids, doc: commentDoc) &&
+    return isValidUser(muteUids: mainModel.muteUids, map: commentDoc.data()!) &&
             isValidComment(
                 muteCommentIds: mainModel.muteCommentIds, comment: comment)
         ? CardContainer(

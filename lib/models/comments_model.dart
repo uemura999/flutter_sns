@@ -43,7 +43,8 @@ class CommentsModel extends ChangeNotifier {
     init();
   }
   Future<void> init() async {
-    muteUids = await returnMuteUids();
+    final muteUidsAndMutePostIds = await returnMuteUidsAndMutePostIds();
+    muteUids = muteUidsAndMutePostIds.first;
   }
 
 //コメントボタンが押された時の処理
@@ -67,6 +68,7 @@ class CommentsModel extends ChangeNotifier {
     refreshController.refreshCompleted();
     await voids.processNewDocs(
         muteUids: muteUids,
+        mutePostIds: [],
         docs: commentDocs,
         query: returnQuery(postDoc: postDoc));
     notifyListeners();
@@ -76,6 +78,7 @@ class CommentsModel extends ChangeNotifier {
       {required DocumentSnapshot<Map<String, dynamic>> postDoc}) async {
     await voids.processBasicDocs(
         muteUids: muteUids,
+        mutePostIds: [],
         docs: commentDocs,
         query: returnQuery(postDoc: postDoc));
     notifyListeners();
@@ -86,6 +89,7 @@ class CommentsModel extends ChangeNotifier {
     refreshController.loadComplete();
     await voids.processOldDocs(
         muteUids: muteUids,
+        mutePostIds: [],
         docs: commentDocs,
         query: returnQuery(postDoc: postDoc));
     notifyListeners();

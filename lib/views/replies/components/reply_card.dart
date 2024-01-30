@@ -33,7 +33,9 @@ class ReplyCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final RepliesModel repliesModel = ref.watch(repliesProvider);
-    return isValidUser(muteUids: mainModel.muteUids, doc: replyDoc) &&
+    return isValidUser(
+                muteUids: mainModel.muteUids,
+                map: replyDoc.data() as Map<String, dynamic>) &&
             isValidReply(muteReplyIds: mainModel.muteReplyIds, reply: reply)
         ? CardContainer(
             borderColor: Colors.green,

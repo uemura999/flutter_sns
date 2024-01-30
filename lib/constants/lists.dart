@@ -1,13 +1,16 @@
 //package
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 //constants
 import 'package:udemy_flutter_sns/constants/enums.dart';
 import 'package:udemy_flutter_sns/constants/others.dart';
+import 'package:udemy_flutter_sns/domain/mute_post_token/mute_post_token.dart';
 import 'package:udemy_flutter_sns/domain/mute_user_token/mute_user_token.dart';
 
-Future<List<String>> returnMuteUids() async {
+Future<List<List<String>>> returnMuteUidsAndMutePostIds() async {
+  //リストの１つ目の要素にmuteUidsを入れる
+  //リストの２つ目の要素にmutePostIdsを入れる
+
   //firebase authのユーザーをreturnしている
   final User? user = returnAuthUser();
   final tokensQshot = await FirebaseFirestore.instance
@@ -21,7 +24,12 @@ Future<List<String>> returnMuteUids() async {
       .where((element) => element['tokenType'] == muteUserTokenTypeString)
       .map((e) => MuteUserToken.fromJson(e.data()).passiveUid)
       .toList();
-  return muteUids;
+
+  final List<String> mutePostIds = tokenDocs
+      .where((element) => element['tokenType'] == mutePostTokenTypeString)
+      .map((e) => MutePostToken.fromJson(e.data()).postId)
+      .toList();
+  return [muteUids, mutePostIds];
 }
 
 List<String> returnSearchWords({required String searchTerm}) {

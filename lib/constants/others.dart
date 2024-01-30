@@ -43,7 +43,7 @@ DocumentReference<Map<String, dynamic>> userDocToTokenDocRef(
 Query<Map<String, dynamic>> returnSearchQuery(
     {required List<String> searchWords}) {
   Query<Map<String, dynamic>> query =
-      FirebaseFirestore.instance.collection('users').limit(30);
+      FirebaseFirestore.instance.collection('users');
   for (final searchWord in searchWords) {
     query = query.where('searchToken.$searchWord', isEqualTo: true);
   }
