@@ -56,7 +56,9 @@ Future<void> processNewDocs(
     final qshot = await query.limit(30).endBeforeDocument(docs.first).get();
     final reversed = qshot.docs.reversed.toList();
     for (final doc in reversed) {
-      if (isValidUser(muteUids: muteUids, doc: doc)) docs.insert(0, doc);
+      //正しいユーザーかどうかの処理と、重複処理を防ぐための処理
+      if (isValidUser(muteUids: muteUids, doc: doc) && !reversed.contains(doc))
+        docs.insert(0, doc);
     }
   }
 }
@@ -70,7 +72,9 @@ Future<void> processBasicDocs(
   for (final doc in qshot.docs) {
     //doc['uid']は投稿主のuid
     //!は否定演算子
-    if (isValidUser(muteUids: muteUids, doc: doc)) docs.add(doc);
+    //正しいユーザーかどうかの処理と、重複処理を防ぐための処理
+    if (isValidUser(muteUids: muteUids, doc: doc) && !docs.contains(doc))
+      docs.add(doc);
   }
 }
 
@@ -82,7 +86,9 @@ Future<void> processOldDocs(
   if (docs.isNotEmpty) {
     final qshot = await query.limit(30).startAfterDocument(docs.last).get();
     for (final doc in qshot.docs) {
-      if (isValidUser(muteUids: muteUids, doc: doc)) docs.add(doc);
+      //正しいユーザーかどうかの処理と、重複処理を防ぐための処理
+      if (isValidUser(muteUids: muteUids, doc: doc) && !docs.contains(doc))
+        docs.add(doc);
     }
   }
 }

@@ -2,9 +2,12 @@
         let replyCount = 0;
         let replyBatch = fireStore.batch();
         for (const reply of replyQshot.docs) {
-            replyBatch.update(reply.ref, {
-                'userName': userName,
-                'userImageURL': userImageURL,
+            replyBatch.update(reply.ref 
+             {
+                'userName':userName,
+
+                'userImageURL':userImageURL,
+
                 'updatedAt': now,
             });
             replyCount++;
@@ -19,3 +22,40 @@
         if(replyCount > 0) {
             await replyBatch.commit();
         }
+
+
+     \n" 
+     "coediting":false 
+     "comments_count":0 
+     "created_at":"2024-01-30T02:02:38+09:00" 
+     "group":null 
+     "id":"cf97ba1e00980a3fdcc8" 
+     "likes_count":0 
+     "private":false 
+     "reactions_count":0 
+     "stocks_count":0 
+     "tags":[{"name":"読書" 
+     "versions":[]} 
+     {"name":"エンジニア" 
+     "versions":[]} 
+     {"name":"感想文" 
+     "versions":[]}] 
+     "title":"「世界一流エンジニアの思考法」読書感想文メモ" 
+     "updated_at":"2024-01-30T02:04:18+09:00" 
+     "url":"https://qiita.com/nagataichiko/items/cf97ba1e00980a3fdcc8" 
+     "user":{"description":"完全在宅エンジニア/尊敬する人は芹沢達也と五番町霧子と岸京一郎/心のエンジニアリングvsエンジニアリングは勝負/上流から下流までやります/組み込み畑で採れて今はWEBとモバイル畑にいます" 
+     "facebook_id":"" 
+     "followees_count":199 
+     "followers_count":15 
+     "github_login_name":"nagata-ichiko" 
+     "id":"nagataichiko" 
+     "items_count":18 
+     "linkedin_id":"" 
+     "location":"でっかいどう" 
+     "name":"ながた いちこ" 
+     "organization":"" 
+     "permanent_id":2727564 
+     "profile_image_url":"https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/2727564/profile-images/1656776143" 
+     "team_only":false 
+     "twitter_screen_name":"nagata_ichiko" 
+     "website_url":""}

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:udemy_flutter_sns/details/circle_image.dart';
 
 class UserImage extends StatelessWidget {
-  UserImage({Key? key, required this.length, required this.userImageURL})
+  const UserImage({Key? key, required this.length, required this.userImageURL})
       : super(key: key);
   final double length;
   final String userImageURL;
