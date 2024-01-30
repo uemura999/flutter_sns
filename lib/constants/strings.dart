@@ -1,5 +1,6 @@
 // packages
 import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 
 const String selectTitle = "選択";
 
@@ -95,13 +96,16 @@ const String missingIosBundleIdMsg = "iOSバンドルIDが見つかりません"
 const String sendEmailVerificationMsg = "メールアドレスの確認用のメールを送信しました";
 const String createdPostMsg = "投稿が作成されました(表示するには時間がかかります。)";
 const String maxSeardhLengthMsg = '検索ワードは100 文字以内で入力してください';
+const String failureRequestMsg = 'リクエストに失敗しました';
 
 // prefs key
 const String isDarkThemePrefsKey = "isDarkTheme";
 // bottom navigation bar
 const String homeText = "Home";
 const String searchText = "Search";
+const String articleText = "Article";
 const String profileText = "Profile";
+
 String returnUuidV4() {
   const Uuid uuid = Uuid();
   return uuid.v4();
@@ -111,3 +115,8 @@ String returnJpgFileName() => "${returnUuidV4()}.jpg";
 
 String updateEmailLagMsg({required String email}) =>
     "$email('更新が反映されるまで時間がかかる可能性がございます')";
+
+Future<String?> validateImageUrl(String url) async {
+  final response = await http.head(Uri.parse(url));
+  return response.statusCode == 200 ? url : null;
+}

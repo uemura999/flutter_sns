@@ -8,12 +8,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:udemy_flutter_sns/constants/themes.dart';
 import 'package:udemy_flutter_sns/constants/strings.dart';
 import 'package:udemy_flutter_sns/views/auth/verify_email_page.dart';
+import 'package:udemy_flutter_sns/views/main/articles_screen.dart';
 //options
 import 'firebase_options.dart';
-//constants
-import 'package:udemy_flutter_sns/models/mute_users_model.dart';
-import 'package:udemy_flutter_sns/models/themes_model.dart';
 //models
+import 'package:udemy_flutter_sns/models/themes_model.dart';
 import 'package:udemy_flutter_sns/models/main_model.dart';
 import 'package:udemy_flutter_sns/models/sns_bottom_navigation_bar_model.dart';
 //components
@@ -67,7 +66,6 @@ class MyHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //MainModelが起動し、init()が実行される
     final MainModel mainModel = ref.watch(mainProvider);
-    final MuteUsersModel muteUsersModel = ref.watch(muteUsersProvider);
 
     final SNSBottomNavigationBarModel snsBottomNavigationBarModel =
         ref.watch(snsBottomNavigationBarProvider);
@@ -82,7 +80,7 @@ class MyHomePage extends ConsumerWidget {
         themeModel: themeModel,
       ),
       body: mainModel.isLoading
-          ? Center(
+          ? const Center(
               child: Text(loadingText),
             )
           : PageView(
@@ -97,6 +95,7 @@ class MyHomePage extends ConsumerWidget {
                 SearchScreen(
                   mainModel: mainModel,
                 ),
+                const ArticlesScreen(),
                 ProfileScreen(
                   mainModel: mainModel,
                 )
