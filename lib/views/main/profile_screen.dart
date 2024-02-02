@@ -50,7 +50,7 @@ class ProfileScreen extends ConsumerWidget {
               ? ReloadScreen(
                   onReload: () async => await profileModel.onReload())
               : SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.8,
                   child: RefreshScreen(
                       onRefresh: () async => await profileModel.onRefresh(),
                       onLoading: () async => await profileModel.onLoading(),

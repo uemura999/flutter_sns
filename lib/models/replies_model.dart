@@ -63,6 +63,10 @@ class RepliesModel extends ChangeNotifier {
     final Reply reply = Reply(
         createdAt: now,
         replyString: replyString,
+        replyLanguageCode: '',
+        replyNegativeScore: 0,
+        replyPositiveScore: 0,
+        replySentiment: '',
         likeCount: 0,
         muteCount: 0,
         postRef: comment.postRef,
@@ -71,6 +75,10 @@ class RepliesModel extends ChangeNotifier {
         userName: firestoreUser.userName,
         uid: activeUid,
         userImageURL: firestoreUser.userImageURL,
+        userNameLanguageCode: firestoreUser.userNameLanguageCode,
+        userNameNegativeScore: firestoreUser.userNameNegativeScore,
+        userNamePositiveScore: firestoreUser.userNamePositiveScore,
+        userNameSentiment: firestoreUser.userNameSentiment,
         updatedAt: now);
     await commentDoc.reference
         .collection('postCommentReplies')

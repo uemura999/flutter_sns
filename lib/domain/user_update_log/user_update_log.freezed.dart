@@ -22,7 +22,8 @@ UserUpdateLog _$UserUpdateLogFromJson(Map<String, dynamic> json) {
 mixin _$UserUpdateLog {
 //順番がわからなくなるので妥協してupdatedAtは入れる。
 //userのupdateには使用させない
-  dynamic get logcreatedAt => throw _privateConstructorUsedError;
+  dynamic get logCreatedAt => throw _privateConstructorUsedError;
+  Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
   dynamic get userRef => throw _privateConstructorUsedError;
@@ -41,7 +42,8 @@ abstract class $UserUpdateLogCopyWith<$Res> {
       _$UserUpdateLogCopyWithImpl<$Res, UserUpdateLog>;
   @useResult
   $Res call(
-      {dynamic logcreatedAt,
+      {dynamic logCreatedAt,
+      Map<String, dynamic> searchToken,
       String userName,
       String userImageURL,
       dynamic userRef,
@@ -61,17 +63,22 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? logcreatedAt = freezed,
+    Object? logCreatedAt = freezed,
+    Object? searchToken = null,
     Object? userName = null,
     Object? userImageURL = null,
     Object? userRef = freezed,
     Object? uid = null,
   }) {
     return _then(_value.copyWith(
-      logcreatedAt: freezed == logcreatedAt
-          ? _value.logcreatedAt
-          : logcreatedAt // ignore: cast_nullable_to_non_nullable
+      logCreatedAt: freezed == logCreatedAt
+          ? _value.logCreatedAt
+          : logCreatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      searchToken: null == searchToken
+          ? _value.searchToken
+          : searchToken // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -101,7 +108,8 @@ abstract class _$$UserUpdateLogImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {dynamic logcreatedAt,
+      {dynamic logCreatedAt,
+      Map<String, dynamic> searchToken,
       String userName,
       String userImageURL,
       dynamic userRef,
@@ -119,17 +127,22 @@ class __$$UserUpdateLogImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? logcreatedAt = freezed,
+    Object? logCreatedAt = freezed,
+    Object? searchToken = null,
     Object? userName = null,
     Object? userImageURL = null,
     Object? userRef = freezed,
     Object? uid = null,
   }) {
     return _then(_$UserUpdateLogImpl(
-      logcreatedAt: freezed == logcreatedAt
-          ? _value.logcreatedAt
-          : logcreatedAt // ignore: cast_nullable_to_non_nullable
+      logCreatedAt: freezed == logCreatedAt
+          ? _value.logCreatedAt
+          : logCreatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      searchToken: null == searchToken
+          ? _value._searchToken
+          : searchToken // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -154,11 +167,13 @@ class __$$UserUpdateLogImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserUpdateLogImpl implements _UserUpdateLog {
   const _$UserUpdateLogImpl(
-      {required this.logcreatedAt,
+      {required this.logCreatedAt,
+      required final Map<String, dynamic> searchToken,
       required this.userName,
       required this.userImageURL,
       required this.userRef,
-      required this.uid});
+      required this.uid})
+      : _searchToken = searchToken;
 
   factory _$UserUpdateLogImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserUpdateLogImplFromJson(json);
@@ -166,7 +181,15 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
 //順番がわからなくなるので妥協してupdatedAtは入れる。
 //userのupdateには使用させない
   @override
-  final dynamic logcreatedAt;
+  final dynamic logCreatedAt;
+  final Map<String, dynamic> _searchToken;
+  @override
+  Map<String, dynamic> get searchToken {
+    if (_searchToken is EqualUnmodifiableMapView) return _searchToken;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_searchToken);
+  }
+
   @override
   final String userName;
   @override
@@ -178,7 +201,7 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
 
   @override
   String toString() {
-    return 'UserUpdateLog(logcreatedAt: $logcreatedAt, userName: $userName, userImageURL: $userImageURL, userRef: $userRef, uid: $uid)';
+    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, searchToken: $searchToken, userName: $userName, userImageURL: $userImageURL, userRef: $userRef, uid: $uid)';
   }
 
   @override
@@ -187,7 +210,9 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
         (other.runtimeType == runtimeType &&
             other is _$UserUpdateLogImpl &&
             const DeepCollectionEquality()
-                .equals(other.logcreatedAt, logcreatedAt) &&
+                .equals(other.logCreatedAt, logCreatedAt) &&
+            const DeepCollectionEquality()
+                .equals(other._searchToken, _searchToken) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.userImageURL, userImageURL) ||
@@ -200,7 +225,8 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(logcreatedAt),
+      const DeepCollectionEquality().hash(logCreatedAt),
+      const DeepCollectionEquality().hash(_searchToken),
       userName,
       userImageURL,
       const DeepCollectionEquality().hash(userRef),
@@ -222,7 +248,8 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
 
 abstract class _UserUpdateLog implements UserUpdateLog {
   const factory _UserUpdateLog(
-      {required final dynamic logcreatedAt,
+      {required final dynamic logCreatedAt,
+      required final Map<String, dynamic> searchToken,
       required final String userName,
       required final String userImageURL,
       required final dynamic userRef,
@@ -233,7 +260,9 @@ abstract class _UserUpdateLog implements UserUpdateLog {
 
   @override //順番がわからなくなるので妥協してupdatedAtは入れる。
 //userのupdateには使用させない
-  dynamic get logcreatedAt;
+  dynamic get logCreatedAt;
+  @override
+  Map<String, dynamic> get searchToken;
   @override
   String get userName;
   @override

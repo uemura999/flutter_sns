@@ -188,6 +188,43 @@ class AdminModel extends ChangeNotifier {
     //   });
     // }
 
+    //post,comment,replyにuserNameの解析Fieldを追加
+    //postsの処理
+    final postsQshot =
+        await FirebaseFirestore.instance.collectionGroup('posts').get();
+    for (final postDoc in postsQshot.docs) {
+      writeBatch.update(postDoc.reference, {
+        //userName
+        'userNameLanguageCode': firestoreUser.userNameLanguageCode,
+        'userNameNegativeScore': firestoreUser.userNameNegativeScore,
+        'userNamePositiveScore': firestoreUser.userNamePositiveScore,
+        'userNameSentiment': firestoreUser.userNameSentiment,
+
+        //text
+        'textLanguageCode': '',
+        'textNegativeScore': 0.0,
+        'textPositiveScore': 0.0,
+        'textSentiment': '',
+      });
+    }
+
+    // //comments全削除
+    // final commentsQshot =
+    //     await FirebaseFirestore.instance.collectionGroup('postComments').get();
+
+    // for (final commentDoc in commentsQshot.docs) {
+    //   writeBatch.delete(commentDoc.reference);
+    // }
+
+    // //replies全削除
+
+    // final repliesQshot = await FirebaseFirestore.instance
+    //     .collectionGroup('postCommentReplies')
+    //     .get();
+    // for (final replyDoc in repliesQshot.docs) {
+    //   writeBatch.delete(replyDoc.reference);
+    // }
+
     await writeBatch.commit();
     await voids.showFluttertoast(msg: '処理が完了しました');
   }

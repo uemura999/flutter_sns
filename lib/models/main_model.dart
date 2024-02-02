@@ -16,7 +16,6 @@ import 'package:udemy_flutter_sns/domain/mute_reply_token/mute_reply_token.dart'
 import 'package:udemy_flutter_sns/domain/mute_user_token/mute_user_token.dart';
 //constants
 import 'package:udemy_flutter_sns/constants/enums.dart';
-import 'package:udemy_flutter_sns/constants/routes.dart' as routes;
 import 'package:udemy_flutter_sns/constants/others.dart';
 
 final mainProvider = ChangeNotifierProvider((ref) => MainModel());
@@ -152,12 +151,5 @@ class MainModel extends ChangeNotifier {
     firestoreUser = firestoreUser.copyWith(
         userName: newUserName, userImageURL: newUserImageURL);
     notifyListeners();
-  }
-
-  Future<void> logout({required BuildContext context}) async {
-    await FirebaseAuth.instance.signOut();
-    setCurrentUser();
-    // ignore: use_build_context_synchronously
-    routes.toLoginPage(context: context);
   }
 }

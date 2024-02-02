@@ -1,12 +1,15 @@
 //Return except int, String
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//dart
+import 'dart:io';
+//flutter
 import 'package:flutter/material.dart';
 //packages
-import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+//constants
 import 'package:udemy_flutter_sns/constants/strings.dart';
 
 Future<XFile?> returnXFile() async {
@@ -49,3 +52,6 @@ Query<Map<String, dynamic>> returnSearchQuery(
   }
   return query;
 }
+
+AppLocalizations returnL10n({required BuildContext context}) =>
+    AppLocalizations.of(context)!;

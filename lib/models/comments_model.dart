@@ -132,6 +132,10 @@ class CommentsModel extends ChangeNotifier {
     final Comment comment = Comment(
         createdAt: now,
         commentString: commentString,
+        commentLanguageCode: '',
+        commentNegativeScore: 0,
+        commentPositiveScore: 0,
+        commentSentiment: '',
         likeCount: 0,
         postRef: postDoc.reference,
         postCommentId: postCommentId,
@@ -140,6 +144,10 @@ class CommentsModel extends ChangeNotifier {
         userName: firestoreUser.userName,
         uid: activeUid,
         userImageURL: firestoreUser.userImageURL,
+        userNameLanguageCode: firestoreUser.userNameLanguageCode,
+        userNameNegativeScore: firestoreUser.userNameNegativeScore,
+        userNamePositiveScore: firestoreUser.userNamePositiveScore,
+        userNameSentiment: firestoreUser.userNameSentiment,
         updatedAt: now);
     await postDoc.reference
         .collection('postComments')

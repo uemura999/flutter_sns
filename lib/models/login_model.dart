@@ -37,6 +37,11 @@ class LoginModel extends ChangeNotifier {
           msg = userDisabledMsg;
       }
       await voids.showFluttertoast(msg: msg);
+    } catch (e) {
+      // その他のエラーのハンドリング
+      String msg = somethingWentWrongMsg;
+      await voids.showFluttertoast(msg: msg);
+      debugPrint(e.toString());
     }
   }
 

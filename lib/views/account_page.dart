@@ -17,6 +17,8 @@ class AccountPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AccountModel accountModel = ref.watch(accountProvider);
+    final firestoreUser = mainModel.firestoreUser;
+    final l10n = returnL10n(context: context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(accountTitle),
@@ -30,7 +32,8 @@ class AccountPage extends ConsumerWidget {
               onTap: () {
                 accountModel.reauthenticationState =
                     ReauthenticateState.updatePassword;
-                routes.toReauthenticationPage(context: context);
+                routes.toReauthenticationPage(
+                    context: context, firestoreUser: firestoreUser);
               }),
           ListTile(
               // emailが更新が反映されるまで時間がかかる可能性がある
@@ -40,11 +43,22 @@ class AccountPage extends ConsumerWidget {
               onTap: () {
                 accountModel.reauthenticationState =
                     ReauthenticateState.updateEmail;
-                routes.toReauthenticationPage(context: context);
+                routes.toReauthenticationPage(
+                    context: context, firestoreUser: firestoreUser);
+              }),
+          ListTile(
+              title: Text(l10n.deleteUser),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              // reauthenticationするページに飛ばす
+              onTap: () {
+                accountModel.reauthenticationState =
+                    ReauthenticateState.deleteUser;
+                routes.toReauthenticationPage(
+                    context: context, firestoreUser: firestoreUser);
               }),
           ListTile(
             title: const Text(logoutText),
-            onTap: () async => await mainModel.logout(context: context),
+            onTap: () async => await accountModel.logout(context: context),
           )
         ],
       ),

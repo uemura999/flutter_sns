@@ -8,6 +8,10 @@ abstract class Comment with _$Comment {
   const factory Comment({
     required dynamic createdAt,
     required String commentString,
+    required String commentLanguageCode,
+    required double commentNegativeScore,
+    required double commentPositiveScore,
+    required String commentSentiment,
     required int likeCount,
     required dynamic postRef,
     required String postCommentId,
@@ -16,6 +20,10 @@ abstract class Comment with _$Comment {
     required String userName,
     required String uid,
     required String userImageURL,
+    required String userNameLanguageCode,
+    required double userNameNegativeScore,
+    required double userNamePositiveScore,
+    required String userNameSentiment,
     required dynamic updatedAt,
   }) = _Comment;
   factory Comment.fromJson(Map<String, dynamic> json) =>

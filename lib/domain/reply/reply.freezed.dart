@@ -22,6 +22,10 @@ Reply _$ReplyFromJson(Map<String, dynamic> json) {
 mixin _$Reply {
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get replyString => throw _privateConstructorUsedError;
+  String get replyLanguageCode => throw _privateConstructorUsedError;
+  double get replyNegativeScore => throw _privateConstructorUsedError;
+  double get replyPositiveScore => throw _privateConstructorUsedError;
+  String get replySentiment => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
   int get muteCount => throw _privateConstructorUsedError;
   dynamic get postRef => throw _privateConstructorUsedError;
@@ -30,6 +34,10 @@ mixin _$Reply {
   String get userName => throw _privateConstructorUsedError; //resource.data.uid
   String get uid => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
+  String get userNameLanguageCode => throw _privateConstructorUsedError;
+  double get userNameNegativeScore => throw _privateConstructorUsedError;
+  double get userNamePositiveScore => throw _privateConstructorUsedError;
+  String get userNameSentiment => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,6 +53,10 @@ abstract class $ReplyCopyWith<$Res> {
   $Res call(
       {dynamic createdAt,
       String replyString,
+      String replyLanguageCode,
+      double replyNegativeScore,
+      double replyPositiveScore,
+      String replySentiment,
       int likeCount,
       int muteCount,
       dynamic postRef,
@@ -53,6 +65,10 @@ abstract class $ReplyCopyWith<$Res> {
       String userName,
       String uid,
       String userImageURL,
+      String userNameLanguageCode,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
       dynamic updatedAt});
 }
 
@@ -71,6 +87,10 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
   $Res call({
     Object? createdAt = freezed,
     Object? replyString = null,
+    Object? replyLanguageCode = null,
+    Object? replyNegativeScore = null,
+    Object? replyPositiveScore = null,
+    Object? replySentiment = null,
     Object? likeCount = null,
     Object? muteCount = null,
     Object? postRef = freezed,
@@ -79,6 +99,10 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
     Object? userName = null,
     Object? uid = null,
     Object? userImageURL = null,
+    Object? userNameLanguageCode = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -89,6 +113,22 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
       replyString: null == replyString
           ? _value.replyString
           : replyString // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyLanguageCode: null == replyLanguageCode
+          ? _value.replyLanguageCode
+          : replyLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyNegativeScore: null == replyNegativeScore
+          ? _value.replyNegativeScore
+          : replyNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replyPositiveScore: null == replyPositiveScore
+          ? _value.replyPositiveScore
+          : replyPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replySentiment: null == replySentiment
+          ? _value.replySentiment
+          : replySentiment // ignore: cast_nullable_to_non_nullable
               as String,
       likeCount: null == likeCount
           ? _value.likeCount
@@ -121,6 +161,22 @@ class _$ReplyCopyWithImpl<$Res, $Val extends Reply>
       userImageURL: null == userImageURL
           ? _value.userImageURL
           : userImageURL // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
               as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -140,6 +196,10 @@ abstract class _$$ReplyImplCopyWith<$Res> implements $ReplyCopyWith<$Res> {
   $Res call(
       {dynamic createdAt,
       String replyString,
+      String replyLanguageCode,
+      double replyNegativeScore,
+      double replyPositiveScore,
+      String replySentiment,
       int likeCount,
       int muteCount,
       dynamic postRef,
@@ -148,6 +208,10 @@ abstract class _$$ReplyImplCopyWith<$Res> implements $ReplyCopyWith<$Res> {
       String userName,
       String uid,
       String userImageURL,
+      String userNameLanguageCode,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
       dynamic updatedAt});
 }
 
@@ -164,6 +228,10 @@ class __$$ReplyImplCopyWithImpl<$Res>
   $Res call({
     Object? createdAt = freezed,
     Object? replyString = null,
+    Object? replyLanguageCode = null,
+    Object? replyNegativeScore = null,
+    Object? replyPositiveScore = null,
+    Object? replySentiment = null,
     Object? likeCount = null,
     Object? muteCount = null,
     Object? postRef = freezed,
@@ -172,6 +240,10 @@ class __$$ReplyImplCopyWithImpl<$Res>
     Object? userName = null,
     Object? uid = null,
     Object? userImageURL = null,
+    Object? userNameLanguageCode = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
     Object? updatedAt = freezed,
   }) {
     return _then(_$ReplyImpl(
@@ -182,6 +254,22 @@ class __$$ReplyImplCopyWithImpl<$Res>
       replyString: null == replyString
           ? _value.replyString
           : replyString // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyLanguageCode: null == replyLanguageCode
+          ? _value.replyLanguageCode
+          : replyLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      replyNegativeScore: null == replyNegativeScore
+          ? _value.replyNegativeScore
+          : replyNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replyPositiveScore: null == replyPositiveScore
+          ? _value.replyPositiveScore
+          : replyPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      replySentiment: null == replySentiment
+          ? _value.replySentiment
+          : replySentiment // ignore: cast_nullable_to_non_nullable
               as String,
       likeCount: null == likeCount
           ? _value.likeCount
@@ -215,6 +303,22 @@ class __$$ReplyImplCopyWithImpl<$Res>
           ? _value.userImageURL
           : userImageURL // ignore: cast_nullable_to_non_nullable
               as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
+              as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -229,6 +333,10 @@ class _$ReplyImpl implements _Reply {
   const _$ReplyImpl(
       {required this.createdAt,
       required this.replyString,
+      required this.replyLanguageCode,
+      required this.replyNegativeScore,
+      required this.replyPositiveScore,
+      required this.replySentiment,
       required this.likeCount,
       required this.muteCount,
       required this.postRef,
@@ -237,6 +345,10 @@ class _$ReplyImpl implements _Reply {
       required this.userName,
       required this.uid,
       required this.userImageURL,
+      required this.userNameLanguageCode,
+      required this.userNameNegativeScore,
+      required this.userNamePositiveScore,
+      required this.userNameSentiment,
       required this.updatedAt});
 
   factory _$ReplyImpl.fromJson(Map<String, dynamic> json) =>
@@ -246,6 +358,14 @@ class _$ReplyImpl implements _Reply {
   final dynamic createdAt;
   @override
   final String replyString;
+  @override
+  final String replyLanguageCode;
+  @override
+  final double replyNegativeScore;
+  @override
+  final double replyPositiveScore;
+  @override
+  final String replySentiment;
   @override
   final int likeCount;
   @override
@@ -264,11 +384,19 @@ class _$ReplyImpl implements _Reply {
   @override
   final String userImageURL;
   @override
+  final String userNameLanguageCode;
+  @override
+  final double userNameNegativeScore;
+  @override
+  final double userNamePositiveScore;
+  @override
+  final String userNameSentiment;
+  @override
   final dynamic updatedAt;
 
   @override
   String toString() {
-    return 'Reply(createdAt: $createdAt, replyString: $replyString, likeCount: $likeCount, muteCount: $muteCount, postRef: $postRef, postCommentRef: $postCommentRef, postCommentReplyId: $postCommentReplyId, userName: $userName, uid: $uid, userImageURL: $userImageURL, updatedAt: $updatedAt)';
+    return 'Reply(createdAt: $createdAt, replyString: $replyString, replyLanguageCode: $replyLanguageCode, replyNegativeScore: $replyNegativeScore, replyPositiveScore: $replyPositiveScore, replySentiment: $replySentiment, likeCount: $likeCount, muteCount: $muteCount, postRef: $postRef, postCommentRef: $postCommentRef, postCommentReplyId: $postCommentReplyId, userName: $userName, uid: $uid, userImageURL: $userImageURL, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, updatedAt: $updatedAt)';
   }
 
   @override
@@ -279,6 +407,14 @@ class _$ReplyImpl implements _Reply {
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.replyString, replyString) ||
                 other.replyString == replyString) &&
+            (identical(other.replyLanguageCode, replyLanguageCode) ||
+                other.replyLanguageCode == replyLanguageCode) &&
+            (identical(other.replyNegativeScore, replyNegativeScore) ||
+                other.replyNegativeScore == replyNegativeScore) &&
+            (identical(other.replyPositiveScore, replyPositiveScore) ||
+                other.replyPositiveScore == replyPositiveScore) &&
+            (identical(other.replySentiment, replySentiment) ||
+                other.replySentiment == replySentiment) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
             (identical(other.muteCount, muteCount) ||
@@ -293,24 +429,41 @@ class _$ReplyImpl implements _Reply {
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.userImageURL, userImageURL) ||
                 other.userImageURL == userImageURL) &&
+            (identical(other.userNameLanguageCode, userNameLanguageCode) ||
+                other.userNameLanguageCode == userNameLanguageCode) &&
+            (identical(other.userNameNegativeScore, userNameNegativeScore) ||
+                other.userNameNegativeScore == userNameNegativeScore) &&
+            (identical(other.userNamePositiveScore, userNamePositiveScore) ||
+                other.userNamePositiveScore == userNamePositiveScore) &&
+            (identical(other.userNameSentiment, userNameSentiment) ||
+                other.userNameSentiment == userNameSentiment) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(createdAt),
-      replyString,
-      likeCount,
-      muteCount,
-      const DeepCollectionEquality().hash(postRef),
-      const DeepCollectionEquality().hash(postCommentRef),
-      postCommentReplyId,
-      userName,
-      uid,
-      userImageURL,
-      const DeepCollectionEquality().hash(updatedAt));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(createdAt),
+        replyString,
+        replyLanguageCode,
+        replyNegativeScore,
+        replyPositiveScore,
+        replySentiment,
+        likeCount,
+        muteCount,
+        const DeepCollectionEquality().hash(postRef),
+        const DeepCollectionEquality().hash(postCommentRef),
+        postCommentReplyId,
+        userName,
+        uid,
+        userImageURL,
+        userNameLanguageCode,
+        userNameNegativeScore,
+        userNamePositiveScore,
+        userNameSentiment,
+        const DeepCollectionEquality().hash(updatedAt)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -330,6 +483,10 @@ abstract class _Reply implements Reply {
   const factory _Reply(
       {required final dynamic createdAt,
       required final String replyString,
+      required final String replyLanguageCode,
+      required final double replyNegativeScore,
+      required final double replyPositiveScore,
+      required final String replySentiment,
       required final int likeCount,
       required final int muteCount,
       required final dynamic postRef,
@@ -338,6 +495,10 @@ abstract class _Reply implements Reply {
       required final String userName,
       required final String uid,
       required final String userImageURL,
+      required final String userNameLanguageCode,
+      required final double userNameNegativeScore,
+      required final double userNamePositiveScore,
+      required final String userNameSentiment,
       required final dynamic updatedAt}) = _$ReplyImpl;
 
   factory _Reply.fromJson(Map<String, dynamic> json) = _$ReplyImpl.fromJson;
@@ -346,6 +507,14 @@ abstract class _Reply implements Reply {
   dynamic get createdAt;
   @override
   String get replyString;
+  @override
+  String get replyLanguageCode;
+  @override
+  double get replyNegativeScore;
+  @override
+  double get replyPositiveScore;
+  @override
+  String get replySentiment;
   @override
   int get likeCount;
   @override
@@ -362,6 +531,14 @@ abstract class _Reply implements Reply {
   String get uid;
   @override
   String get userImageURL;
+  @override
+  String get userNameLanguageCode;
+  @override
+  double get userNameNegativeScore;
+  @override
+  double get userNamePositiveScore;
+  @override
+  String get userNameSentiment;
   @override
   dynamic get updatedAt;
   @override
