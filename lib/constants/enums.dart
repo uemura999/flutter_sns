@@ -1,4 +1,9 @@
-enum ReauthenticateState { initialValue, updatePassword, updateEmail }
+enum ReauthenticateState {
+  initialValue,
+  updatePassword,
+  updateEmail,
+  deleteUser
+}
 
 enum SortState { byLikeCount, byNewestFirst, byOldestFirst }
 

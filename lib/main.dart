@@ -1,10 +1,16 @@
+//dart
+import 'dart:async';
+import 'dart:ui';
 //flutter
 import 'package:flutter/material.dart';
 //packages
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:udemy_flutter_sns/constants/others.dart';
 //constants
 import 'package:udemy_flutter_sns/constants/themes.dart';
 import 'package:udemy_flutter_sns/constants/strings.dart';
@@ -29,6 +35,31 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  const fatalError = true;
+  // Non-async exceptions
+  //Dartのエラーを報告
+  FlutterError.onError = (errorDetails) {
+    if (fatalError) {
+      // If you want to record a "fatal" exception
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+      // ignore: dead_code
+    } else {
+      // If you want to record a "non-fatal" exception
+      FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+    }
+  };
+  // Async exceptions
+  PlatformDispatcher.instance.onError = (error, stack) {
+    if (fatalError) {
+      // If you want to record a "fatal" exception
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      // ignore: dead_code
+    } else {
+      // If you want to record a "non-fatal" exception
+      FirebaseCrashlytics.instance.recordError(error, stack);
+    }
+    return true;
+  };
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -41,6 +72,8 @@ class MyApp extends ConsumerWidget {
     final User? onceUser = FirebaseAuth.instance.currentUser;
     final ThemeModel themeModel = ref.watch(themeProvider);
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       title: appTitle,
       debugShowCheckedModeBanner: false,
       theme: themeModel.isDarkTheme
@@ -72,8 +105,8 @@ class MyHomePage extends ConsumerWidget {
 
     return Scaffold(
       body: mainModel.isLoading
-          ? const Center(
-              child: Text(loadingText),
+          ? Center(
+              child: Text(returnL10n(context: context).loading),
             )
           : PageView(
               controller: snsBottomNavigationBarModel.pageController,

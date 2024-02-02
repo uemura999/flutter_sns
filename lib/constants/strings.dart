@@ -68,6 +68,7 @@ const String sortByOldText = "古い順に並び替え";
 const String usersText = "ユーザー";
 const String postsText = "投稿";
 const String searchHintText = '検索ワードを入力してください';
+const String deleteUserText = "ユーザーを削除する";
 
 // alert message
 const String muteUserAlertMsg = 'ユーザーをミュートしますが本当によろしいですか？';

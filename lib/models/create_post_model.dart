@@ -55,11 +55,19 @@ class CreatePostModel extends ChangeNotifier {
         imageUrl: "",
         likeCount: 0,
         text: text,
+        textLanguageCode: "",
+        textNegativeScore: 0,
+        textPositiveScore: 0,
+        textSentiment: "",
         muteCount: 0,
         postId: postId,
         uid: activeUid,
         userName: firestoreUser.userName,
         userImageURL: firestoreUser.userImageURL,
+        userNameLanguageCode: firestoreUser.userNameLanguageCode,
+        userNameNegativeScore: firestoreUser.userNameNegativeScore,
+        userNamePositiveScore: firestoreUser.userNamePositiveScore,
+        userNameSentiment: firestoreUser.userNameSentiment,
         updatedAt: now);
 
     //FirebaseFirestore.instance.collection("users").doc(activeUid)

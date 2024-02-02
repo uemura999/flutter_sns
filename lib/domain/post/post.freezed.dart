@@ -26,10 +26,18 @@ mixin _$Post {
   String get imageUrl => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
+  String get textLanguageCode => throw _privateConstructorUsedError;
+  double get textNegativeScore => throw _privateConstructorUsedError;
+  double get textPositiveScore => throw _privateConstructorUsedError;
+  String get textSentiment => throw _privateConstructorUsedError;
   int get muteCount => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
+  String get userNameLanguageCode => throw _privateConstructorUsedError;
+  double get userNameNegativeScore => throw _privateConstructorUsedError;
+  double get userNamePositiveScore => throw _privateConstructorUsedError;
+  String get userNameSentiment => throw _privateConstructorUsedError;
   String get userImageURL => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
 
@@ -50,10 +58,18 @@ abstract class $PostCopyWith<$Res> {
       String imageUrl,
       int likeCount,
       String text,
+      String textLanguageCode,
+      double textNegativeScore,
+      double textPositiveScore,
+      String textSentiment,
       int muteCount,
       String postId,
       String uid,
       String userName,
+      String userNameLanguageCode,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
       String userImageURL,
       dynamic updatedAt});
 }
@@ -77,10 +93,18 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? imageUrl = null,
     Object? likeCount = null,
     Object? text = null,
+    Object? textLanguageCode = null,
+    Object? textNegativeScore = null,
+    Object? textPositiveScore = null,
+    Object? textSentiment = null,
     Object? muteCount = null,
     Object? postId = null,
     Object? uid = null,
     Object? userName = null,
+    Object? userNameLanguageCode = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
     Object? userImageURL = null,
     Object? updatedAt = freezed,
   }) {
@@ -109,6 +133,22 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      textLanguageCode: null == textLanguageCode
+          ? _value.textLanguageCode
+          : textLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      textNegativeScore: null == textNegativeScore
+          ? _value.textNegativeScore
+          : textNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      textPositiveScore: null == textPositiveScore
+          ? _value.textPositiveScore
+          : textPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      textSentiment: null == textSentiment
+          ? _value.textSentiment
+          : textSentiment // ignore: cast_nullable_to_non_nullable
+              as String,
       muteCount: null == muteCount
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
@@ -124,6 +164,22 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
               as String,
       userImageURL: null == userImageURL
           ? _value.userImageURL
@@ -151,10 +207,18 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       String imageUrl,
       int likeCount,
       String text,
+      String textLanguageCode,
+      double textNegativeScore,
+      double textPositiveScore,
+      String textSentiment,
       int muteCount,
       String postId,
       String uid,
       String userName,
+      String userNameLanguageCode,
+      double userNameNegativeScore,
+      double userNamePositiveScore,
+      String userNameSentiment,
       String userImageURL,
       dynamic updatedAt});
 }
@@ -175,10 +239,18 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? imageUrl = null,
     Object? likeCount = null,
     Object? text = null,
+    Object? textLanguageCode = null,
+    Object? textNegativeScore = null,
+    Object? textPositiveScore = null,
+    Object? textSentiment = null,
     Object? muteCount = null,
     Object? postId = null,
     Object? uid = null,
     Object? userName = null,
+    Object? userNameLanguageCode = null,
+    Object? userNameNegativeScore = null,
+    Object? userNamePositiveScore = null,
+    Object? userNameSentiment = null,
     Object? userImageURL = null,
     Object? updatedAt = freezed,
   }) {
@@ -207,6 +279,22 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      textLanguageCode: null == textLanguageCode
+          ? _value.textLanguageCode
+          : textLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      textNegativeScore: null == textNegativeScore
+          ? _value.textNegativeScore
+          : textNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      textPositiveScore: null == textPositiveScore
+          ? _value.textPositiveScore
+          : textPositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      textSentiment: null == textSentiment
+          ? _value.textSentiment
+          : textSentiment // ignore: cast_nullable_to_non_nullable
+              as String,
       muteCount: null == muteCount
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
@@ -222,6 +310,22 @@ class __$$PostImplCopyWithImpl<$Res>
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameLanguageCode: null == userNameLanguageCode
+          ? _value.userNameLanguageCode
+          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      userNameNegativeScore: null == userNameNegativeScore
+          ? _value.userNameNegativeScore
+          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNamePositiveScore: null == userNamePositiveScore
+          ? _value.userNamePositiveScore
+          : userNamePositiveScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      userNameSentiment: null == userNameSentiment
+          ? _value.userNameSentiment
+          : userNameSentiment // ignore: cast_nullable_to_non_nullable
               as String,
       userImageURL: null == userImageURL
           ? _value.userImageURL
@@ -245,10 +349,18 @@ class _$PostImpl implements _Post {
       required this.imageUrl,
       required this.likeCount,
       required this.text,
+      required this.textLanguageCode,
+      required this.textNegativeScore,
+      required this.textPositiveScore,
+      required this.textSentiment,
       required this.muteCount,
       required this.postId,
       required this.uid,
       required this.userName,
+      required this.userNameLanguageCode,
+      required this.userNameNegativeScore,
+      required this.userNamePositiveScore,
+      required this.userNameSentiment,
       required this.userImageURL,
       required this.updatedAt})
       : _hashTags = hashTags;
@@ -275,6 +387,14 @@ class _$PostImpl implements _Post {
   @override
   final String text;
   @override
+  final String textLanguageCode;
+  @override
+  final double textNegativeScore;
+  @override
+  final double textPositiveScore;
+  @override
+  final String textSentiment;
+  @override
   final int muteCount;
   @override
   final String postId;
@@ -283,13 +403,21 @@ class _$PostImpl implements _Post {
   @override
   final String userName;
   @override
+  final String userNameLanguageCode;
+  @override
+  final double userNameNegativeScore;
+  @override
+  final double userNamePositiveScore;
+  @override
+  final String userNameSentiment;
+  @override
   final String userImageURL;
   @override
   final dynamic updatedAt;
 
   @override
   String toString() {
-    return 'Post(commentCount: $commentCount, createdAt: $createdAt, hashTags: $hashTags, imageUrl: $imageUrl, likeCount: $likeCount, text: $text, muteCount: $muteCount, postId: $postId, uid: $uid, userName: $userName, userImageURL: $userImageURL, updatedAt: $updatedAt)';
+    return 'Post(commentCount: $commentCount, createdAt: $createdAt, hashTags: $hashTags, imageUrl: $imageUrl, likeCount: $likeCount, text: $text, textLanguageCode: $textLanguageCode, textNegativeScore: $textNegativeScore, textPositiveScore: $textPositiveScore, textSentiment: $textSentiment, muteCount: $muteCount, postId: $postId, uid: $uid, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, userNamePositiveScore: $userNamePositiveScore, userNameSentiment: $userNameSentiment, userImageURL: $userImageURL, updatedAt: $updatedAt)';
   }
 
   @override
@@ -306,12 +434,28 @@ class _$PostImpl implements _Post {
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
             (identical(other.text, text) || other.text == text) &&
+            (identical(other.textLanguageCode, textLanguageCode) ||
+                other.textLanguageCode == textLanguageCode) &&
+            (identical(other.textNegativeScore, textNegativeScore) ||
+                other.textNegativeScore == textNegativeScore) &&
+            (identical(other.textPositiveScore, textPositiveScore) ||
+                other.textPositiveScore == textPositiveScore) &&
+            (identical(other.textSentiment, textSentiment) ||
+                other.textSentiment == textSentiment) &&
             (identical(other.muteCount, muteCount) ||
                 other.muteCount == muteCount) &&
             (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
+            (identical(other.userNameLanguageCode, userNameLanguageCode) ||
+                other.userNameLanguageCode == userNameLanguageCode) &&
+            (identical(other.userNameNegativeScore, userNameNegativeScore) ||
+                other.userNameNegativeScore == userNameNegativeScore) &&
+            (identical(other.userNamePositiveScore, userNamePositiveScore) ||
+                other.userNamePositiveScore == userNamePositiveScore) &&
+            (identical(other.userNameSentiment, userNameSentiment) ||
+                other.userNameSentiment == userNameSentiment) &&
             (identical(other.userImageURL, userImageURL) ||
                 other.userImageURL == userImageURL) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
@@ -319,20 +463,29 @@ class _$PostImpl implements _Post {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      commentCount,
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(_hashTags),
-      imageUrl,
-      likeCount,
-      text,
-      muteCount,
-      postId,
-      uid,
-      userName,
-      userImageURL,
-      const DeepCollectionEquality().hash(updatedAt));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        commentCount,
+        const DeepCollectionEquality().hash(createdAt),
+        const DeepCollectionEquality().hash(_hashTags),
+        imageUrl,
+        likeCount,
+        text,
+        textLanguageCode,
+        textNegativeScore,
+        textPositiveScore,
+        textSentiment,
+        muteCount,
+        postId,
+        uid,
+        userName,
+        userNameLanguageCode,
+        userNameNegativeScore,
+        userNamePositiveScore,
+        userNameSentiment,
+        userImageURL,
+        const DeepCollectionEquality().hash(updatedAt)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -356,10 +509,18 @@ abstract class _Post implements Post {
       required final String imageUrl,
       required final int likeCount,
       required final String text,
+      required final String textLanguageCode,
+      required final double textNegativeScore,
+      required final double textPositiveScore,
+      required final String textSentiment,
       required final int muteCount,
       required final String postId,
       required final String uid,
       required final String userName,
+      required final String userNameLanguageCode,
+      required final double userNameNegativeScore,
+      required final double userNamePositiveScore,
+      required final String userNameSentiment,
       required final String userImageURL,
       required final dynamic updatedAt}) = _$PostImpl;
 
@@ -378,6 +539,14 @@ abstract class _Post implements Post {
   @override
   String get text;
   @override
+  String get textLanguageCode;
+  @override
+  double get textNegativeScore;
+  @override
+  double get textPositiveScore;
+  @override
+  String get textSentiment;
+  @override
   int get muteCount;
   @override
   String get postId;
@@ -385,6 +554,14 @@ abstract class _Post implements Post {
   String get uid;
   @override
   String get userName;
+  @override
+  String get userNameLanguageCode;
+  @override
+  double get userNameNegativeScore;
+  @override
+  double get userNamePositiveScore;
+  @override
+  String get userNameSentiment;
   @override
   String get userImageURL;
   @override

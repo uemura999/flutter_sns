@@ -8,7 +8,8 @@ part of 'user_update_log.dart';
 
 _$UserUpdateLogImpl _$$UserUpdateLogImplFromJson(Map<String, dynamic> json) =>
     _$UserUpdateLogImpl(
-      logcreatedAt: json['logcreatedAt'],
+      logCreatedAt: json['logCreatedAt'],
+      searchToken: json['searchToken'] as Map<String, dynamic>,
       userName: json['userName'] as String,
       userImageURL: json['userImageURL'] as String,
       userRef: json['userRef'],
@@ -17,7 +18,8 @@ _$UserUpdateLogImpl _$$UserUpdateLogImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$UserUpdateLogImplToJson(_$UserUpdateLogImpl instance) =>
     <String, dynamic>{
-      'logcreatedAt': instance.logcreatedAt,
+      'logCreatedAt': instance.logCreatedAt,
+      'searchToken': instance.searchToken,
       'userName': instance.userName,
       'userImageURL': instance.userImageURL,
       'userRef': instance.userRef,

@@ -6,6 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:udemy_flutter_sns/constants/lists.dart';
+import 'package:udemy_flutter_sns/constants/maps.dart';
 //constants
 import 'package:udemy_flutter_sns/constants/others.dart';
 import 'package:udemy_flutter_sns/constants/strings.dart';
@@ -47,7 +49,9 @@ class EditProfileModel extends ChangeNotifier {
       //idを指定する必要がない。なぜならアプリから呼び出すことがないなく、消すこともないから
       //.doc()とすることで自動でidが割り振られる
       final UserUpdateLog updateLog = UserUpdateLog(
-          logcreatedAt: Timestamp.now(),
+          logCreatedAt: Timestamp.now(),
+          searchToken: returnSearchToken(
+              searchWords: returnSearchWords(searchTerm: userName)),
           userName: userName,
           userImageURL: userImageURL,
           userRef: currentUserDoc.reference,

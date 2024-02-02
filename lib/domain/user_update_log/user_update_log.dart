@@ -10,7 +10,8 @@ abstract class UserUpdateLog with _$UserUpdateLog {
   const factory UserUpdateLog({
     //順番がわからなくなるので妥協してupdatedAtは入れる。
     //userのupdateには使用させない
-    required dynamic logcreatedAt,
+    required dynamic logCreatedAt,
+    required Map<String, dynamic> searchToken,
     required String userName,
     required String userImageURL,
     required dynamic userRef,

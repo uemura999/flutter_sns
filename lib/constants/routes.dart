@@ -8,7 +8,6 @@ import 'package:udemy_flutter_sns/domain/firestore_user/firestore_user.dart';
 import 'package:udemy_flutter_sns/domain/post/post.dart';
 //pages
 import 'package:udemy_flutter_sns/main.dart';
-import 'package:udemy_flutter_sns/models/auth/account_model.dart';
 import 'package:udemy_flutter_sns/views/account_page.dart';
 import 'package:udemy_flutter_sns/views/admin_page.dart';
 import 'package:udemy_flutter_sns/views/auth/reauthentication_page.dart';
@@ -18,6 +17,7 @@ import 'package:udemy_flutter_sns/views/auth/verify_email_page.dart';
 import 'package:udemy_flutter_sns/views/auth/verify_password_reset_page.dart';
 import 'package:udemy_flutter_sns/views/comments/comments_page.dart';
 import 'package:udemy_flutter_sns/views/edit_profile_page.dart';
+import 'package:udemy_flutter_sns/views/finished_page.dart';
 import 'package:udemy_flutter_sns/views/mute_comments_page.dart';
 import 'package:udemy_flutter_sns/views/mute_posts_page.dart';
 import 'package:udemy_flutter_sns/views/mute_replies_page.dart';
@@ -141,9 +141,14 @@ void toUpdatePasswordPage({required BuildContext context}) => Navigator.push(
     context,
     MaterialPageRoute(builder: ((context) => const UpdatePasswordPage())));
 
-void toReauthenticationPage({required BuildContext context}) => Navigator.push(
-    context,
-    MaterialPageRoute(builder: ((context) => const ReauthenticationPage())));
+void toReauthenticationPage(
+        {required BuildContext context,
+        required FirestoreUser firestoreUser}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: ((context) =>
+                ReauthenticationPage(firestoreUser: firestoreUser))));
 
 void toVerifyPasswordResetPage({required BuildContext context}) =>
     Navigator.push(
@@ -154,3 +159,11 @@ void toVerifyPasswordResetPage({required BuildContext context}) =>
 void toVerifyEmailPage({required BuildContext context}) => Navigator.push(
     context,
     MaterialPageRoute(builder: ((context) => const VerifyEmailPage())));
+
+void toFinishedPage({required BuildContext context, required String msg}) =>
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => FinishedPage(
+                  msg: msg,
+                )));

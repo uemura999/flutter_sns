@@ -1,0 +1,20 @@
+
+        
+        
+        
+
+        let replyCount = 0;
+        let replyBatch = fireStore.batch();
+        for (const reply of replies.docs) {
+            const data = reply.data();
+            replyBatch.delete(reply.ref);
+            replyCount++;
+            if (replyCount == batchLimit) {
+                await replyBatch.commit();
+                replyBatch = fireStore.batch();
+                replyCount = 0;
+            }
+        }
+        if (replyCount > 0) {
+            await replyBatch.commit();
+        }
